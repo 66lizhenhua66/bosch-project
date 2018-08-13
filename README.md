@@ -1,2 +1,4 @@
 # bosch-project
-bosch-rexroth
+bosch project by mabo-lzh
+
+

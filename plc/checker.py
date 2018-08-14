@@ -1,9 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-circuits
-trio
-"""
-
 import time
 import struct
 import traceback

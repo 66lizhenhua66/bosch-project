@@ -1,0 +1,122 @@
+<nb-card class="prescri-div">
+  <ng-template #saveAsP>
+    <div class="p-4">
+      <form>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="另存为的名字" 
+          (input)="save_new_number=$event.target.value" name="n_name">
+        </div>
+        <button class="btn btn-primary w-100" 
+        nbPopover="点击保存到服务器!" 
+        nbPopoverMode="hint" 
+        nbPopoverPlacement="bottom"
+        (click)="save_new_program()">保存为新程序</button>
+      </form>
+    </div>
+  </ng-template>
+  <ng-template #renameP>
+    <div class="p-4">
+      <form>
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="新名字" 
+          (input)="rename_name=$event.target.value" name="rename_name">
+        </div>
+        <button class="btn btn-primary w-100" 
+        nbPopover="点击更新到服务器!" 
+        nbPopoverMode="hint" 
+        nbPopoverPlacement="bottom"
+        (click)="rename_program()">修改</button>
+      </form>
+    </div>
+  </ng-template>
+  <ng-template #addP>
+      <div class="p-4">
+        <form>
+          <div class="form-group">
+            <input type="text" class="form-control" placeholder="新程序号."
+            (input)="new_p_number=$event.target.value" name="new_p_number">
+          </div>
+          <button class="btn btn-primary w-100" 
+          nbPopover="点击添加到服务器!" 
+          nbPopoverMode="hint" 
+          nbPopoverPlacement="bottom"
+          (click)="add_program()">添加程序</button>
+        </form>
+      </div>
+  </ng-template>
+  <ng-template #deleteP>
+      <div class="p-4">
+        <form>
+          <label style="color: red; font-size: 22px;">确定删除该程序吗？</label>
+          <button class="btn btn-primary" 
+          (click)="delete_program()">确定</button>
+        </form>
+      </div>
+  </ng-template>
+
+  <nb-card-header>
+    <div class="prescri-header">
+      <label>当前工位&nbsp;:&nbsp;&nbsp;</label>
+      <select [(ngModel)]="selected_station" class="form-control prescri-select"
+      (ngModelChange)="change_station($event)"
+      >
+        <option *ngFor="let station of STATIONS" [ngValue]="station">{{ station.station_name }}</option>
+      </select>
+      <label>当前程序号&nbsp;:&nbsp;&nbsp;</label>
+      <select [(ngModel)]="selected_program" class="form-control prescri-select" 
+      (ngModelChange)="change_program($event)" >
+        <option *ngFor="let item of programs; let i=index" [ngValue]="item">{{ item.program_number }}</option>
+      </select>
+      <label >产品类型&nbsp;:&nbsp;&nbsp;</label>
+      <input type="text" class="form-control model-input" placeholder="选填" [(ngModel)]="product_number" >
+      <div>
+        <span style="color: black;">
+          当前总步数:&nbsp;&nbsp;{{ selected_program.detail_program.length }}
+        </span>
+        <button [nbPopover]="addP">添加程序</button>
+
+        <button
+        nbPopover="保存(发布)到服务器!" 
+        nbPopoverMode="hint" 
+        nbPopoverPlacement="bottom"
+        (click)="save_program()"
+        >保存程序</button>
+
+        <button [nbPopover]="saveAsP">另存为程序</button>
+        <button [nbPopover]="renameP" >重命名程序</button>
+        <!-- <button [nbPopover]="deleteP" >删除程序</button> -->
+      </div>
+
+      <!-- <button (click)="save_prescri()" 
+      nbPopover="保存到服务器!" 
+      nbPopoverMode="hint" 
+      nbPopoverPlacement="bottom"
+      >保存配方</button>
+      <button [nbPopover]="saveAs">配方另存为</button>
+      <button [nbPopover]="rename">重命名配方</button> -->
+      <!-- <button>编辑该配方</button>
+      <button>删除该配方</button> -->
+    </div>
+
+  </nb-card-header>
+
+  <nb-card-body>
+    <toaster-container [toasterconfig]="config"></toaster-container>
+    
+    <div class="prescri-body">
+      <eachcraft *ngFor="let step of selected_program.detail_program; let i=index"
+        [selected_program]="selected_program"
+        [step]='step'
+        [step_index]='i'
+        [OPTIONS]='selected_station'
+      ></eachcraft>
+
+      <div class="add-step">
+        <button (click)="add_step()" >
+          添加步骤
+        </button>
+      </div>
+    </div>
+
+  </nb-card-body>
+</nb-card>

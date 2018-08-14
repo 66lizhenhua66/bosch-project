@@ -1,0 +1,63 @@
+<nb-card>
+<nb-card-header>
+    <div class="title-div">A10用户权限管理</div>
+</nb-card-header>
+
+<nb-card-body>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 10%;">序号</th>
+                <th style="width: 20%">登录用户名</th>
+                <th style="width: 20%">登录密码</th>
+                <th style="width: 20%">显示用户名</th>
+                <th style="width: 20%">头像路径</th>
+                <th style="width: 10%">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of users; let i=index" >
+                <td>{{ i + 1 }}</td>
+                <td>
+                    <input *ngIf="!editables[i]" placeholder="用户名" type="text" [(ngModel)]="item.user" class="form-control" disabled>
+                    <input *ngIf="editables[i]" placeholder="用户名" type="text" [(ngModel)]="item.user" class="form-control">
+                </td>
+                <td>
+                    <input *ngIf="!editables[i]" placeholder="密码" type="password" [(ngModel)]="item.pw" class="form-control" disabled>
+                    <input *ngIf="editables[i]" placeholder="密码" type="text" [(ngModel)]="item.pw" class="form-control">
+                </td>
+                <td>
+                    <input *ngIf="!editables[i]" placeholder="名字" type="text" [(ngModel)]="item.show_name" class="form-control" disabled>
+                    <input *ngIf="editables[i]" placeholder="名字" type="text" [(ngModel)]="item.show_name" class="form-control">
+                </td>
+                <td>
+                    <input *ngIf="!editables[i]" placeholder="头像图片路径" type="text" [(ngModel)]="item.img_path" class="form-control" disabled>
+                    <div *ngIf="editables[i]" style="position: relative;" >
+                        <input type="text" placeholder="头像图片路径" [value]="item.img_path" class="form-control file-input" placeholder="未选择任何文件" disabled>
+                        <button class="file-button">
+                        <input type="file" class="upload" (change)="selected_img($event, i)"/>
+                        <span>选择头像</span>
+                        </button>
+                    </div>
+
+                    <!-- <input *ngIf="editables[i]" type="text" [(ngModel)]="item.img_path" class="form-control"> -->
+                </td>
+                <td>
+                    <button *ngIf="!editables[i]" (click)="edit(i)" class="edit-button">编辑</button>
+                    <i *ngIf="editables[i]" (click)="save(i)" class="ion-checkmark-round save-i"></i>
+
+                    <i *ngIf="editables[i]" (click)="delete(i)" class="ion-trash-b delete-i"></i>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <div class="add-div">
+        <button (click)="add_user()" >添加用户</button>
+    </div>
+
+
+</nb-card-body>
+</nb-card>
+<toaster-container [toasterconfig]="config"></toaster-container>

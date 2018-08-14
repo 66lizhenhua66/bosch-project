@@ -1,0 +1,42 @@
+<nb-layout>
+
+  <nb-layout-column style="padding: 0;">
+    <div class="back-div">
+      <div class="login-div">
+        <nb-card class="login-card">
+          <nb-card-header>
+            <div class="header-div">
+              <span>博世力士乐PkP A10装配管理登录</span> 
+            </div>
+          </nb-card-header>
+          <nb-card-body>
+            <div class="input-group has-person-icon">
+              <i class="nb-person">
+              </i>
+              <input type="text" (focus)="hide_error()" (keyup.enter)="enter()" placeholder="用户名" [(ngModel)]='user' class="form-control"/>
+            </div>
+            <div class="input-group">
+              <i class="nb-locked"></i>
+              <input type="password" (focus)="hide_error()" (keyup.enter)="enter()" placeholder="密码" [(ngModel)]='pw' class="form-control"/>
+            </div>
+            <div *ngIf="show_error" style="color:red;">
+              用户或密码不正确!
+            </div>
+            <div class="submit-div">
+              <button (click)="login()" >登录</button>
+            </div>
+  
+            
+          </nb-card-body>
+        </nb-card>
+
+      </div>
+
+    </div>
+
+    <div class="footer-div">
+      <span class="created-by">Created with ♥ by <b><a href="#" target="_blank">MaboTech</a></b> 2018</span>
+    </div>
+  </nb-layout-column>
+
+</nb-layout>

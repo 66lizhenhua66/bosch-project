@@ -1,0 +1,226 @@
+<nb-card class="craft-card">
+  <nb-card-body>
+    <div *ngIf="step.is_auto" class="auto">
+      <i *ngIf="step_index !== 0" class="ion-chevron-up up" (click)="up_craft()"></i>
+      <i *ngIf="step_index !== selected_program.detail_program.length - 1" class="ion-chevron-down down" (click)="down_craft()" ></i>
+      <div class="left-div">
+        <div class="raw-div">
+          <div class="label-div">
+            <label>步骤名称&nbsp;:&nbsp;&nbsp;</label>
+          </div>
+          <select [(ngModel)]="step.step_name" class="form-control step-select" (ngModelChange)="change_step($event)">
+            <option *ngFor="let item of OPTIONS.steps" [value]="item.step_name">{{ item.step_name }}</option>
+          </select>
+        </div>
+        <div class="raw-div">
+          <div class="label-div">
+            <label >程序号&nbsp;:&nbsp;&nbsp;</label>
+          </div>
+          <input type="text" placeholder="请输入程序号" class="form-control normal-input" [(ngModel)]="step.pro_num" >
+        </div>
+        <div class="raw-div">
+          <div class="label-div">
+            <label >数量&nbsp;:&nbsp;&nbsp;</label>
+          </div>
+          <input type="text" placeholder="请输入数量" class="form-control normal-input" [(ngModel)]="step.count" >
+        </div>
+
+        <div class="raw-div">
+          <div class="label-div">
+            <label >枪头型号&nbsp;:&nbsp;&nbsp;</label>
+          </div>
+          <input type="text" placeholder="套筒或者枪头型号(选填)" class="form-control normal-input" [(ngModel)]="step.model_number" >
+        </div>
+      </div>
+
+      <div class="right-div">
+          <div class="raw-div">
+            <div class="label-div">
+              <label >左PDF路径&nbsp;:&nbsp;&nbsp;</label>
+            </div>
+            <input type="text" [value]="step.left_pdf" class="form-control file-input" placeholder="未选择任何文件" disabled>
+            <button class="file-button">
+              <input type="file" class="upload" (change)="selectedLeftFile($event)"/>
+              <span>选择文件</span>
+            </button>
+          </div>
+    
+          <div class="raw-div">
+            <div class="label-div">
+              <label >右PDF路径&nbsp;:&nbsp;&nbsp;</label>
+            </div>
+            <input type="text" [value]="step.right_pdf" class="form-control file-input" placeholder="未选择任何文件" disabled>
+            <button class="file-button">
+              <input type="file" class="upload" (change)="selectedRightFile($event)"/>
+              <span>选择文件</span>
+            </button>
+          </div>
+
+          <div class="raw-div">
+            <div class="label-div">
+              <label>阶段名称&nbsp;:&nbsp;&nbsp;</label>
+            </div>
+            <select [(ngModel)]="step.stage_name" class="form-control step-select" >
+              <option *ngFor="let item of OPTIONS.stages" [value]="item">{{ item }}</option>
+            </select>
+          </div>
+
+          <div class="raw-div">
+            <div class="label-div">
+              <label >力矩值&nbsp;:&nbsp;&nbsp;</label>
+            </div>
+          <input type="text" placeholder="力矩值(选填)" class="form-control normal-input" [(ngModel)]="step.torque" >
+          </div>
+          
+
+      </div>
+
+      <div class="full-div">
+        <div *ngFor="let item of step.test_steps" class="test-div">
+          
+          <div class="left-div">
+
+            <div class="raw-div">
+              <div class="label-div">
+                <label >测试项名称&nbsp;:&nbsp;&nbsp;</label>
+              </div>
+              <select class="form-control prescri-select step-select" [(ngModel)]="item.test_name" >
+                <option *ngFor="let temp of OPTIONS.tests" [value]="temp">{{ temp }}</option>
+              </select>
+            </div>
+
+            <span class="raw-span">
+              <div class="label-span">
+                <label >上限&nbsp;:&nbsp;&nbsp;</label>
+              </div>
+              <input type="text" class="form-control normal-input half-normal-input" [(ngModel)]="item.max" >
+            </span>
+
+            <span class="raw-span">
+              <div class="label-span">
+                <label >下限&nbsp;:&nbsp;&nbsp;</label>
+              </div>
+              <input type="text" class="form-control normal-input half-normal-input" [(ngModel)]="item.min" >
+            </span>
+
+            <div class="raw-div">
+              <div class="label-div">
+                <label >单位&nbsp;:&nbsp;&nbsp;</label>
+              </div>
+              <input type="text" class="form-control normal-input" [(ngModel)]="item.unit">
+            </div>
+
+          </div>
+
+          <div class="right-div">
+
+            <div class="raw-div">
+              <div class="label-div">
+                <label >数据类型&nbsp;:&nbsp;&nbsp;</label>
+              </div>
+              <select class="form-control prescri-select step-select" [(ngModel)]="item.data_type" >
+                <option *ngFor="let temp of OPTIONS.data_types" [value]="temp">{{ temp }}</option>
+              </select>
+            </div>
+
+            <div class="raw-div">
+              <div class="label-div">
+                <label >比较方式&nbsp;:&nbsp;&nbsp;</label>
+              </div>
+              <select class="form-control prescri-select step-select" [(ngModel)]="item.comparison" >
+                <option *ngFor="let temp of OPTIONS.comparisons" [value]="temp" >{{ temp }}</option>
+              </select>
+            </div>
+
+            <div class="raw-div">
+              <div class="label-div">
+                <label >精度位数&nbsp;:&nbsp;&nbsp;</label>
+              </div>
+              <select class="form-control prescri-select step-select" [(ngModel)]="item.precision" >
+                <option *ngFor="let temp of OPTIONS.precisions" [value]="temp">{{ temp }}</option>
+              </select>
+            </div>
+
+          </div>
+
+        </div>
+       
+      </div>
+
+    </div>
+    
+    <div *ngIf="!step.is_auto" class="hand"> 
+        <i *ngIf="step_index !== 0" class="ion-chevron-up up" (click)="up_craft()"></i>
+        <i *ngIf="step_index !== selected_program.detail_program.length - 1" class="ion-chevron-down down" (click)="down_craft()" ></i>
+        <div class="left-div">
+          <div class="raw-div">
+            <div class="label-div">
+              <label>步骤名称&nbsp;:&nbsp;&nbsp;</label>
+            </div>
+            <select [(ngModel)]="step.step_name" class="form-control step-select" (ngModelChange)="change_step($event)" >
+              <option *ngFor="let item of OPTIONS.steps" [value]="item.step_name">{{ item.step_name }}</option>
+            </select>
+          </div>
+          
+          <div class="raw-div">
+            <div class="label-div">
+              <label (click)="test()">是否有PTL&nbsp;:&nbsp;&nbsp;</label>
+            </div>
+  
+            <label class="custom-control custom-radio radio">
+              <input type="radio" class="custom-control-input" [value]="false" name="{{ step_index }}" [(ngModel)]="step.is_ptl">
+              <span class="custom-control-indicator radio-image"></span>
+              <span class="custom-control-description radio-text">无</span>
+            </label>
+            <label class="custom-control custom-radio radio">
+              <input type="radio" class="custom-control-input" [value]="true" name="{{ step_index }}" [(ngModel)]="step.is_ptl">
+              <span class="custom-control-indicator radio-image"></span>
+              <span class="custom-control-description radio-text">有</span>
+            </label>
+            <input type="text" *ngIf="step.is_ptl" class="form-control ptl-input" placeholder="输入PTL的位置" name="ptl_value" [(ngModel)]="step.ptl_pos">
+            <input type="text" *ngIf="!step.is_ptl" class="form-control ptl-input" placeholder="输入PTL的位置" disabled>
+          </div>
+
+
+        </div>
+
+        <div class="right-div">
+
+          <div class="raw-div">
+            <div class="label-div">
+              <label >左PDF路径&nbsp;:&nbsp;&nbsp;</label>
+            </div>
+            <input type="text" [value]="step.left_pdf" class="form-control file-input" placeholder="未选择任何文件" disabled>
+            <button class="file-button">
+              <input type="file" class="upload" id="left_file" (change)="selectedLeftFile($event)"/>
+              <span>选择文件</span>
+            </button>
+          </div>
+  
+          <div class="raw-div">
+            <div class="label-div">
+              <label >右PDF路径&nbsp;:&nbsp;&nbsp;</label>
+            </div>
+            <input type="text" [value]="step.right_pdf" class="form-control file-input" placeholder="未选择任何文件" disabled>
+            <button class="file-button">
+              <input type="file" class="upload" (change)="selectedRightFile($event)"/>
+              <span>选择文件</span>
+            </button>
+          </div>
+
+        </div>
+
+      
+
+
+        
+
+
+      
+      
+
+    </div>
+    <i class="ion-close-round delete" (click)="delete_craft()" ></i>
+
+  </nb-card-body>
+</nb-card>

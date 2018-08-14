@@ -1,0 +1,97 @@
+
+.prescri-div{
+    height: 850px;
+    overflow-y: auto;
+    // border: 2px solid red;
+}
+.prescri-header {
+    height: 100px;
+    line-height: 50px;
+    text-align: center;
+
+    
+}
+
+.prescri-header label{
+    color: black;
+
+}
+
+.prescri-header .model-input {
+    display: inline-block;
+    width: 15%;
+}
+.prescri-header .prescri-select{
+    margin-right: 3%;
+    width: 20%;
+    display: inline-block;
+}
+
+.prescri-header button{
+    color: white;
+    padding: .75rem 0.5rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    border-radius: .5rem;
+    margin-left: 5%;
+    background-color: #002b49;
+    border: 2px solid transparent;
+    letter-spacing: .4px;
+    font-weight: 500;
+    font-family: Exo;
+    outline: none;
+}
+.prescri-header button:hover{
+    color: #fff;
+    background-color: #244962;
+    border-color: transparent;
+}
+.prescri-header button:active{
+    background-color: #00253f;
+}
+
+.prescri-body {
+    margin-bottom: 20px;
+    color: black;
+}
+
+.title{
+    height: 50px;
+    line-height: 40px;
+}
+.title-div label{
+    width: 100%;
+    text-align: center;
+    font-size: 2.25rem;
+    // color: white;
+}
+
+.add-step{
+    text-align: center;
+}
+
+.add-step button{
+    color: white;
+    padding: .75rem 1.5rem;
+    font-size: 1rem;
+    line-height: 1.25;
+    border-radius: .5rem;
+    margin-left: 5%;
+    background-color: #002b49;
+    border: 2px solid transparent;
+    letter-spacing: .4px;
+    font-weight: 500;
+    font-family: Exo;
+    outline: none;
+
+}
+.add-step button:hover{
+    color: #fff;
+    background-color: #244962;
+    border-color: transparent;
+
+}
+.add-step button:active{
+    background-color: #00253f;
+}
+

@@ -1,0 +1,31 @@
+.layout-div {
+    padding: 0;
+}
+.back-div {
+    height: 1024px;
+    // background-color: red;
+    background: url(../../assets/images/Rexroth-Background.jpg) no-repeat 0 0;
+    // background-size: 1920px 1080px;
+    background-position: -200px -200px;
+    overflow: hidden;
+}
+
+.logout-card {
+    position: fixed;
+    width: 50%;
+    height: 50%;
+    top: 50%;
+    left: 50%;
+}
+
+.footer-div {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
+    border-top: 1px solid white;
+    line-height: 40px;
+}
+.footer-div .created-by {
+    color: black;
+}

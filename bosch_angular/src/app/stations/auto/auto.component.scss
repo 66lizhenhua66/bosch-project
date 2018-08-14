@@ -1,0 +1,308 @@
+nb-card-header {
+    padding: .25rem;
+
+}
+
+.title-div {
+    text-align: center;
+}
+.title-div .back {
+    float: left;
+}
+.title-div button {
+    float: right;
+    color: white;
+    text-decoration: none;
+    padding: .75rem 0.5rem;
+    font-size: 1rem;
+    border-radius: .5rem;
+    background-color: #002b49;
+    border: 2px solid transparent;
+    letter-spacing: .4px;
+    font-weight: 500;
+    font-family: Exo;
+    outline: none;
+
+}
+.title-div button:hover{
+    color: #fff;
+    background-color: #244962;
+    border-color: transparent;
+}
+.title-div button:active{
+    background-color: #00253f;
+}
+.title-div a{
+    float: left;
+    color: white;
+    text-decoration: none;
+    padding: .75rem 0.5rem;
+    font-size: 1rem;
+    border-radius: .5rem;
+    background-color: #002b49;
+    border: 2px solid transparent;
+    letter-spacing: .4px;
+    font-weight: 500;
+    font-family: Exo;
+    outline: none;
+}
+.title-div a:hover{
+    color: #fff;
+    background-color: #244962;
+    border-color: transparent;
+}
+.title-div a:active{
+    background-color: #00253f;
+}
+
+.title-div span{
+    font-size: 2.5rem;
+    color: black;
+}
+.left-status {
+    float: left;
+    width: 15%;
+    margin-right: 1%;
+}
+.left-status .label-div {
+    height: 25px;
+    line-height: 25px;
+}
+.left-status .label-div label {
+    margin-bottom: 0px;
+    font-weight: bold;
+
+}
+.left-status .value-div {
+    text-align: center;
+    margin-bottom: 10px;
+}
+.left-status .value-div .value-input {
+    text-align: center;
+    padding: 0px;
+}
+.pdf-div {
+    width: 42%;
+    position: relative;
+    float: left
+}
+.pdf {
+    height: 683px;
+    overflow: auto;
+}
+.page {
+    width: 20px;
+    margin: 0 5px;
+}
+.left-pdf {
+}
+
+.right-pdf {
+}
+
+.option-div {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 12px;
+    left: 0px;
+}
+.option-div button {
+    margin: 0 5px;
+}
+
+
+.button-div {
+    text-align: center;
+}
+.button-div div {
+    margin-bottom: 10px;
+}
+.button-div button{
+    width: 80%;
+    color: white;
+    padding: .75rem 0.5rem;
+    font-size: 2rem;
+    line-height: 1.25;
+    border-radius: .5rem;
+    // margin-left: 5%;
+    background-color: #002b49;
+    border: 2px solid transparent;
+    letter-spacing: .4px;
+    font-weight: 500;
+    font-family: Exo;
+    outline: none;
+}
+.button-div button:hover{
+    color: #fff;
+    background-color: #244962;
+    border-color: transparent;
+}
+.button-div button:active{
+    background-color: #00253f;
+}
+
+.bottom-status {
+    float: left;
+    width: 100%;
+    height: 140px;
+}
+
+.bottom-left {
+    float: left;
+    width: 28%;
+    border: 1px solid #d6dee3;
+    border-radius: 0.5rem;
+    margin-right: 2%;
+}
+.bottom-right {
+    float: left;
+    width: 70%;
+    border: 1px solid #d6dee3;
+    border-radius: 0.5rem;
+}
+
+.bottom-title {
+    border-bottom: 1px solid #d6dee3;
+    height: 30px;
+    line-height: 30px;
+    text-indent: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.bottom-left .input-div {
+    float: left;
+    width: 48%;
+    height: 55px;
+    margin: 0 1%;
+}
+.bottom-left .input-div .label-div {
+    height: 20px;
+    line-height: 20px;
+}
+.bottom-left .input-div .value-div {
+    height: 35px;
+    line-height: 35px;
+}
+.bottom-left .input-div .value-div input{
+    padding: 0;
+    text-align: center;
+}
+
+.bottom-right .input-div {
+    float: left;
+    width: 48%;
+    height: 55px;
+    margin: 0 1%;
+}
+.bottom-right .input-div .label-div {
+    height: 20px;
+    line-height: 20px;
+}
+.bottom-right .input-div .value-div {
+    height: 35px;
+    // line-height: 35px;
+}
+.bottom-right .input-div .value-div input{
+    padding: 0;
+    text-align: center;
+}
+.bottom-right div .describe-div {
+    width: 100%;
+
+}
+.bottom-right .input-div .value-div .textarea {
+    background-color: #d6dee3;
+    border-radius: 0.5rem;
+    overflow-y: auto;
+    width: 95%;
+    height: 82px;
+    padding: 0px;
+    font-size: 1.5rem;
+}
+.textarea .textarea-title {
+    font-size: 1rem;
+    font-weight: bold;
+    height: auto;
+}
+
+.torque-div {
+    position: absolute;
+    bottom: 19%;
+    right: 3%;
+    width: 32%;
+    background-color: #a3bac8;
+    border: 2px solid #d6dee3;
+}
+
+.torque-div table {
+    width: 100%;
+}
+.torque-div table th, .torque-div table td {
+    text-align: center;
+    width: 33%;
+    border: 1px solid #d6dee3;
+
+}
+
+
+.small-input {
+    display: inline-block;
+    width: 45%;
+
+
+}
+
+.wait-div {
+    width: 98%;
+    height: 890px;
+    // opacity: 0.7;
+    // z-index: 9999;
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+}
+.photo-div {
+    position: absolute;
+    top: 20%;
+    left: 20%;
+    width: 78%;
+    height: 54%;
+    z-index: 9998;
+}
+.photo-div .photo-text {
+    color: black;
+    font-size: 2rem;
+}
+.photo-div img {
+    width: 48%;
+    margin-right: 1%;
+    height: auto;
+}
+
+
+.focus-button {
+    margin-top: 10px;
+    float: right;
+    color: white;
+    text-decoration: none;
+    padding: .75rem 0.5rem;
+    font-size: 1rem;
+    border-radius: .5rem;
+    background-color: #002b49;
+    border: 2px solid transparent;
+    letter-spacing: .4px;
+    font-weight: 500;
+    font-family: Exo;
+    outline: none;
+
+}
+.focus-button:hover{
+    color: #fff;
+    background-color: #244962;
+    border-color: transparent;
+}
+.fucus-button:active{
+    background-color: #00253f;
+}

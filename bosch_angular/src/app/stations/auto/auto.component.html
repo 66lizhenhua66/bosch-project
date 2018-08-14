@@ -1,0 +1,405 @@
+<nb-layout>
+    <nb-layout-header fixed>
+      <ngx-header></ngx-header>
+    </nb-layout-header>
+  
+    <nb-layout-column style="padding: .3rem 2.25rem 0rem;">
+      
+      <nb-card *ngIf="is_complete" class="wait-div">
+        <nb-card-header>
+          <div class="title-div">
+            <!-- <a routerLink="/stations/{{ id_2_station[id] }}">返回</a> -->
+            <button class='back' (click)="back_2_index()" >返回</button>
+            <span>{{ id_2_station[id] }}</span>
+            <button class="refresh" (click)="refresh()" >刷新</button>
+          </div>
+        </nb-card-header>
+        <nb-card-body>
+          <span>
+            等待扫描sn号。。。
+          </span>
+        </nb-card-body>
+      </nb-card>
+
+      <nb-card *ngIf="!is_complete">
+        <nb-card-header>
+          <div class="title-div">
+            <!-- <a routerLink="/stations/{{ id_2_station[id] }}">返回</a> -->
+            <button class='back' (click)="back_2_index()" >返回</button>
+            <span>{{ id_2_station[id] }}</span>
+            <button class="refresh" (click)="refresh()" >刷新</button>
+          </div>
+        </nb-card-header>
+        <nb-card-body style="padding: .25rem 1.25rem;">
+
+          <!-- <nb-card *ngIf="is_complete" class="wait-div">
+            <nb-card-body>
+              <span>
+                等待扫描sn号。。。
+              </span>
+            </nb-card-body>
+          </nb-card> -->
+
+          <nb-card *ngIf="show_photo" class="photo-div">
+            <nb-card-header>
+              <div class="photo-text">
+                <span>拍照检测结果&nbsp;&nbsp;</span> 
+                <span *ngIf="photo_result" style="color:green;font-weight: bold;">OK</span>
+                <span *ngIf="!photo_result" style="color:red;font-weight: bold;">NOK</span>
+                <span>&nbsp;&nbsp;图片如下：</span>
+              </div>
+            </nb-card-header>
+            <nb-card-body>
+              <img src="{{ left_photo }}" alt="">
+              <img src="{{ right_photo }}" alt="">
+              <div style="text-align: center;">
+                <span *ngIf="photo_result" style="font-size:1.5rem;font-weight: bold;">{{ show_time }}s后自动跳到下一步</span>
+                <button *ngIf="!photo_result" class="focus-button" (click)="focus_complete()" >强制下一步</button>
+              </div>
+            </nb-card-body>
+          </nb-card>
+          
+          <div class="left-status">
+            <div class="label-div">
+              <label for="">员工ID:</label>
+            </div>
+            <div class="value-div">
+              <input type="text" [value]="login_states.user_number" class="form-control value-input" disabled>
+            </div>
+
+            <div class="label-div">
+              <label for="">订单号:</label>
+            </div>
+            <div class="value-div">
+              <input type="text" [value]="selected_order.order_number" name="onumber" class="form-control value-input" disabled>
+            </div>
+            <div class="label-div">
+              <label for="">程序号:</label>
+            </div>
+            <div class="value-div">
+              <input type="text" [value]="selected_order.program_number" name="pnumber" class="form-control value-input" disabled>
+            </div>
+
+            <div class="label-div">
+              <label for="">序列号:</label>
+            </div>
+            <div class="value-div">
+              <input type="text" [value]="selected_order.sn_number" name="snumber" class="form-control value-input" disabled>
+            </div>
+
+            <div class="label-div">
+              <label for="">订单数量:</label>
+            </div>
+            <div class="value-div">
+              <input type="text" value="5" class="form-control value-input" disabled>
+            </div>
+
+            <div class="label-div">
+              <label for="">当前生产:</label>
+            </div>
+            <div class="value-div">
+              <input type="text" value="5" class="form-control value-input" disabled>
+            </div>
+            <div class="label-div">
+              <label for="">模式状态:</label>
+            </div>
+            <div class="value-div">
+              <input type="text" value="开始" class="form-control value-input" disabled>
+            </div>
+
+            <div class="button-div">
+              <div>
+                <button (click)="reset_step()">重置</button>
+              </div>
+              <div>
+                <button>泵NOK</button>
+              </div>
+
+              <span *ngIf="selected_step.is_auto">
+                <span *ngIf="selected_step.pro_num.split('-')[0] === 'P'">
+                  <div *ngIf="current_step_index !== selected_program.detail_program.length - 1">
+                    <button (click)="next_or_complete()">下一步</button>
+                  </div>
+                  <div *ngIf="current_step_index === selected_program.detail_program.length - 1">
+                    <button (click)="complete()">完工</button>
+                  </div>
+                </span>
+                <span *ngIf="selected_step.pro_num.split('-')[0] !== 'P'">
+                  <div *ngIf="current_step_index !== selected_program.detail_program.length - 1">
+                    <button (click)="next_or_complete()" disabled>下一步</button>
+                  </div>
+                  <div *ngIf="current_step_index === selected_program.detail_program.length - 1">
+                    <button (click)="complete()" disabled>完工</button>
+                  </div>
+                </span>
+              </span>
+
+              <span *ngIf="!selected_step.is_auto">
+                <div *ngIf="current_step_index !== selected_program.detail_program.length - 1">
+                  <button *ngIf="!selected_step.is_ptl" (click)="next_or_complete()">下一步</button>
+                  <button *ngIf="selected_step.is_ptl" (click)="next_or_complete()" disabled>下一步</button>
+                </div>
+                <div *ngIf="current_step_index === selected_program.detail_program.length - 1">
+                  <button *ngIf="!selected_step.is_ptl" (click)="complete()">完工</button>
+                  <button *ngIf="selected_step.is_ptl" (click)="complete()" disabled>完工</button>
+                </div>
+              </span>
+
+            </div>
+
+
+          </div>
+          <div class="left-pdf pdf-div">
+            <div class="pdf">
+              <pdf-viewer *ngIf="selected_step.left_pdf" [src]="selected_step.left_pdf" 
+                          [render-text]="false"
+                          [show-all]="false"
+                          [page]="left_page"
+                          [zoom]="left_zoom"
+                          (after-load-complete)="load_left_pdf_done($event)"
+                          style="display: block;"
+              ></pdf-viewer>
+            </div>
+            <div class="option-div">
+              <span>
+                <button
+                (click)="left_prev_page()"
+                >上一页</button>
+                <label class="page">{{ left_page }}</label>
+                <button
+                (click)="left_next_page()" 
+                >下一页</button>
+  
+                <button (click)="left_zoom_down()" >
+                  缩小
+                </button>
+                <button (click)="left_zoom_up()">增大</button>
+              </span>
+            </div>
+
+          </div>
+          <div class="right-pdf pdf-div">
+            <div class="pdf">
+              <pdf-viewer *ngIf="selected_step.right_pdf" [src]="selected_step.right_pdf" 
+              [render-text]="false"
+              [show-all]="false"
+              [page]="right_page"
+              [zoom]="right_zoom"
+              (after-load-complete)="load_right_pdf_done($event)"
+              style="display: block;"
+              ></pdf-viewer>
+
+            </div>
+              <div class="option-div">
+                <button
+                (click)="right_prev_page()"
+                >上一页</button>
+                <label class="page">{{ right_page }}</label>
+                <button
+                (click)="right_next_page()" 
+                >下一页</button>
+
+                <button (click)="right_zoom_down()" >
+                  缩小
+                </button>
+                <button (click)="right_zoom_up()">增大</button>
+              </div>
+
+          </div>
+          <div class="bottom-status">
+            <div class="bottom-left">
+              <div class="bottom-title">
+                信息
+              </div>
+              <div class="input-div">
+                <div class="label-div">
+                  <label >托盘:</label>
+                </div>
+                <div class="value-div">
+                  <input type="text" value="XXXXX" class="form-control" disabled>
+                </div>
+              </div>
+              <div class="input-div">
+                <div class="label-div">
+                  <label for="">产品:</label>
+                </div>
+                <div class="value-div">
+                  <input type="text" [value]="selected_program.product_number" class="form-control" disabled>
+                </div>
+              </div>
+              <div class="input-div">
+                <div class="label-div">
+                  <label >工序程序:</label>
+                </div>
+                <div *ngIf="selected_step.is_auto" class="value-div">
+                  <input type="text" [value]="selected_step.pro_num" name="pro_num" class="form-control" disabled>
+                </div>
+                <div *ngIf="!selected_step.is_auto" class="value-div">
+                  <input type="text" value="无" class="form-control" disabled>
+                </div>
+              </div>
+
+              <div class="input-div">
+                <div class="label-div">
+                  <label >数量:</label>
+                </div>
+                <div *ngIf="selected_step.is_auto" class="value-div">
+                  <input type="text" [value]="selected_step.count" name="count" class="form-control" disabled>
+                </div>
+                <div *ngIf="!selected_step.is_auto" class="value-div">
+                  <input type="text" value="无" class="form-control" disabled>
+                </div>
+              </div>
+              <!-- <div class="input-div">
+                <div class="label-div">
+                  <label for="">序列号:</label>
+                </div>
+                <div class="value-div">
+                  <input type="text" vlaue="XXXXX" class="form-control" disabled>
+                </div>
+              </div> -->
+                        
+            </div>
+            <div class="bottom-right">
+              <div class="bottom-title">
+                状态
+              </div>
+              <div style="float: left;width: 50%;">
+
+                <div class="input-div">
+                  <div class="label-div">
+                    <label >当前工步:</label>
+                  </div>
+                  <div class="value-div">
+                    <input type="text" [value]="current_step_index + 1" name="step_index" class="form-control" disabled>
+                  </div>
+                </div>
+                <div class="input-div">
+                  <div class="label-div">
+                    <label >总计工步:</label>
+                  </div>
+                  <div class="value-div">
+                    <input type="text" [value]="selected_program.detail_program.length" name="steps_length" class="form-control" disabled>
+                  </div>
+                </div>
+                <div class="input-div">
+                  <div class="label-div">
+                    <label >工序类型:</label>
+                  </div>
+                  <div class="value-div">
+                    <span *ngIf="!selected_step.is_auto">
+                      <input *ngIf="selected_step.is_ptl" type="text" value="防错信号安装" class="form-control" disabled>
+                      <input *ngIf="!selected_step.is_ptl" type="text" value="手动安装" class="form-control" disabled>
+                    </span>
+                    <span *ngIf="selected_step.is_auto">
+                      <input *ngIf="selected_step.pro_num.split('-')[0] === 'T'" type="text" value="使用扭矩枪" class="form-control" disabled>
+                      <input *ngIf="selected_step.pro_num.split('-')[0] === 'C'" type="text" value="使用照相机" class="form-control" disabled>
+                      <input *ngIf="selected_step.pro_num.split('-')[0] === 'P'" type="text" value="使用压力机" class="form-control" disabled>
+                      <!-- <input type="text" value="压力机" class="form-control" disabled> -->
+                    </span>
+                  </div>
+                </div>
+               
+  
+                <div class="input-div">
+                  <div class="label-div">
+                    <label >状态:</label>
+                  </div>
+                  <div class="value-div">
+                    <span *ngIf="selected_step.is_auto">
+                      <input type="text" value="{{ temp_state }}" class="form-control small-input" disabled>—
+                      <input *ngIf="temp_state === '等待'" style="background-color: grey" type="text" value="{{ temp_okornok }}" class="form-control small-input" disabled>
+                      <input *ngIf="temp_state !== '等待'" type="text" 
+                      [ngStyle]="{'background-color': temp_okornok === 'OK' ? 'green' : 'red'}"
+                      value="{{ temp_okornok }}" class="form-control small-input" disabled>
+                      
+                    </span>
+                    <span *ngIf="!selected_step.is_auto">
+                      <input type="text" value="无" class="form-control small-input" disabled>—
+                      <input type="text" value="无" class="form-control small-input" disabled>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <span *ngIf="selected_step.is_auto">
+                <div class="torque-div" *ngIf="selected_step.pro_num.split('-')[0] === 'T'">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>次数</th>
+                        <th>扭矩大小</th>
+                        <th>是否合格</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of temp_states; let i=index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ item['torque'] }}</td>
+                        <td *ngIf="item.result" style="background-color: green" >合格</td>
+                        <td *ngIf="!item.result" style="background-color: red" >不合格</td>
+                      </tr>
+                      <tr *ngIf="temp_count === '0'" >
+                        <td colspan=4 style="color: green; font-weight: bold; font-size: 1.25rem;" >{{ torque_time }}S后自动跳转下一步</td>
+                      </tr>
+                      <tr *ngIf="temp_count !== '0'">
+                        <td colspan=4 style="color: red; font-weight: bold; font-size: 1.25rem;" >请按要求完成打够合适的扭矩!</td>
+                      </tr>
+                    </tbody>
+                  </table>
+  
+                </div>
+
+              </span>
+
+              <div style="float: left; width: 50%;">
+                <div class="input-div describe-div">
+                  <div class="label-div">
+                    <label >工序描述:</label>
+                  </div>
+                  <div class="value-div">
+                    <div class="textarea">
+                      <div class="textarea-title">{{ selected_step.step_name }}</div>
+                      <div *ngIf="selected_step.is_auto">
+                        <span style="font-weight: bold;font-size:1rem;">工序程序:&nbsp;&nbsp;</span>
+                        <span style="color: black;font-size:1.25rem;">{{ selected_step.pro_num.split('-')[2] }}</span>
+                        &nbsp;&nbsp;
+                        <span style="font-weight: bold;font-size:1rem;">剩余执行次数:&nbsp;&nbsp;</span>
+                        <span style="color: black;font-size:1.25rem">{{ temp_count }}</span>
+
+                        <!-- <div class="torque-div" *ngIf="selected_step.pro_num.split('-')[0] === 'torque'">
+                          <span *ngFor="let item of temp_states; let i=index">
+                            <span style="font-size: 1rem;">{{ i + 1 }}:&nbsp;</span>
+                            <span *ngIf="item.result" class="ok-span" >{{ item['torque'] }}&nbsp;&nbsp;</span>
+                            <span *ngIf="!item.result" class="nok-span" >{{ item['torque'] }}&nbsp;&nbsp;</span>
+                          </span>
+
+                        </div> -->
+
+                        <div *ngIf="selected_step.pro_num.split('-')[0] === 'C'">
+                          <span style="font-weight: normal;font-size:1rem;">等待拍照...</span>
+                        </div>
+                        <div *ngIf="selected_step.pro_num.split('-')[0] === 'P'">
+                          <span>压力机工作</span>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+                
+            </div>
+
+          </div>
+
+
+        
+
+
+        </nb-card-body>
+      </nb-card>
+    </nb-layout-column>
+ 
+  </nb-layout>

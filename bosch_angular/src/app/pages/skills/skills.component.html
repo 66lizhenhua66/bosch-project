@@ -1,0 +1,77 @@
+<nb-card>
+<nb-card-header>
+    <div class="title-div">A10员工技能管理</div>
+</nb-card-header>
+
+<nb-card-body>
+    <table>
+        <thead>
+            <tr>
+                <th style="width: 4%;">序号</th>
+                <th style="width: 16%">磁卡编号</th>
+                <th style="width: 15%">员工编号</th>
+                <th style="width: 15%">员工名字</th>
+                <th style="width: 20%">技能权限</th>
+                <th style="width: 20%">头像路径</th>
+                <th style="width: 10%">操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of station_users; let i=index" >
+                <td>{{ i + 1 }}</td>
+                <td>
+                  <span *ngIf="is_editable">
+                    <input *ngIf="i === station_users.length - 1" placeholder="磁卡编号" type="text" [(ngModel)]="item.card_id" class="form-control">
+                    <input *ngIf="i !== station_users.length - 1" placeholder="磁卡编号" type="text" [(ngModel)]="item.card_id" class="form-control" disabled>
+                  </span>
+                  <span *ngIf="!is_editable">
+                    <input placeholder="磁卡编号" type="text" [(ngModel)]="item.card_id" class="form-control" disabled>
+                  </span>
+                </td>
+                <td>
+                    <input *ngIf="!editables[i]" placeholder="员工编号" type="text" [(ngModel)]="item.user_number" class="form-control" disabled>
+                    <input *ngIf="editables[i]" placeholder="员工编号" type="text" [(ngModel)]="item.user_number" class="form-control">
+                </td>
+                <td>
+                    <input *ngIf="!editables[i]" placeholder="名字" type="text" [(ngModel)]="item.name" class="form-control" disabled>
+                    <input *ngIf="editables[i]" placeholder="名字" type="text" [(ngModel)]="item.name" class="form-control">
+                </td>
+                <td>
+                  <div *ngFor="let temp of item.authority; let j=index" class="checkbox-div">
+                    <label class="checkbox-label">{{ j + 1 }}</label>
+                    <div class="checkbox-span">
+                      <nb-checkbox *ngIf="!editables[i]" [(ngModel)]="temp.value" disabled></nb-checkbox>
+                      <nb-checkbox *ngIf="editables[i]" [(ngModel)]="temp.value"></nb-checkbox>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                    <input *ngIf="!editables[i]" placeholder="头像图片路径" type="text" [(ngModel)]="item.img_path" class="form-control" disabled>
+                    <div *ngIf="editables[i]" style="position: relative;" >
+                        <input type="text" placeholder="头像图片路径" [value]="item.img_path" class="form-control file-input" placeholder="未选择任何文件" disabled>
+                        <button class="file-button">
+                        <input type="file" class="upload" (change)="selected_img($event, i)"/>
+                        <span>选择头像</span>
+                        </button>
+                    </div>
+
+                </td>
+                <td>
+                    <button *ngIf="!editables[i]" (click)="edit(i)" class="edit-button">编辑</button>
+                    <i *ngIf="editables[i]" (click)="save(i)" class="ion-checkmark-round save-i"></i>
+
+                    <i *ngIf="editables[i]" (click)="delete(i)" class="ion-trash-b delete-i"></i>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+
+    <div class="add-div">
+        <button (click)="add_user()" >添加员工信息</button>
+    </div>
+
+</nb-card-body>
+</nb-card>
+<toaster-container [toasterconfig]="config"></toaster-container>
+

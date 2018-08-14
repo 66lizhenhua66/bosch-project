@@ -1,0 +1,96 @@
+<nb-card class="craft-card">
+  <nb-card-body>
+    <div class="step-div">
+      <i *ngIf="craft_index !== 0"
+      style="cursor: pointer;"
+      (click)="up_craft()"
+      class="nb-arrow-up"></i>
+      <span *ngIf="craft_index === 0"
+      style="display: inline-block; width: 30px; height: 30px;"></span>
+      <div>步</div>
+      <div>骤</div>
+      <div>{{ craft_index + 1 }}</div>
+      <i *ngIf="(selected_p.crafts.length !== 1) && (craft_index !== selected_p.crafts.length - 1)"
+      
+      (click)="down_craft()"
+      style="cursor: pointer;"
+      class="nb-arrow-down"></i>
+    </div>
+    <div class="left-div">
+      <div>
+        <span>产品型号:&nbsp;&nbsp;</span>
+        <input type="text" placeholder="选填" class="form-control">
+      </div>
+      <div>
+        <span>步骤名称:&nbsp;&nbsp;</span> 
+        <select [(ngModel)]="craft.step_name" class="form-control">
+          <option *ngFor="let step of step_arr" [value]="step">{{ step }}</option>
+        </select>
+      </div>
+      <div>
+        <span>阶段名称:&nbsp;&nbsp;</span>
+        <select [(ngModel)]="craft.stage_name" class="form-control">
+          <option *ngFor="let stage of stage_arr" [value]="stage">{{ stage }}</option>
+        </select>
+      </div>
+      <div>
+        <span>测试项名称:&nbsp;&nbsp;</span>
+        <input type="text" [value]="craft.test_name" class="form-control">
+      </div>
+      <div>
+        <span>数据类型:&nbsp;&nbsp;</span>
+        <select [(ngModel)]="craft.data_type" class="form-control">
+          <option *ngFor="let item of data_arr" [value]="item">{{ item }}</option>
+        </select>
+      </div>
+      <div>
+        <span>精度位数:&nbsp;&nbsp;</span>
+        <select [(ngModel)]="craft.accuracy" class="form-control">
+          <option *ngFor="let item of accuracy_arr" [value]="item">{{ item }}</option>
+        </select>
+      </div>
+      <div>
+        <span>比较方式:&nbsp;&nbsp;</span>
+        <select [(ngModel)]="craft.comparison" class="form-control">
+          <option *ngFor="let item of compare_arr" [value]="item">{{ item }}</option>
+        </select>
+      </div>
+    </div>
+    <div class="right-div">
+      <div>
+        <span>上限:&nbsp;&nbsp;</span>
+        <input type="text" [value]="craft.max" class="form-control">
+        <i class="ion-close-round delete"
+        (click)="delete_craft()"></i>
+      </div>
+      <div>
+          <span>下限:&nbsp;&nbsp;</span>
+          <input type="text" [value]="craft.min" class="form-control">
+      </div>
+      <div>
+        <span>单位:&nbsp;&nbsp;</span>
+        <input type="text" [value]="craft.unit" class="form-control">
+      </div>
+      <div>
+        <span>螺丝枪程序选择:&nbsp;&nbsp;</span>
+        <input type="text" [value]="craft.luosiqiang_choice" class="form-control">
+      </div>
+      <div>
+        <span>螺丝数量:&nbsp;&nbsp;</span>
+        <input type="text" [value]="craft.luosi_count" class="form-control">
+      </div>
+      <div>
+        <span>左PDF路径:&nbsp;&nbsp;</span>
+        <select [(ngModel)]="craft.left_pdf_path" class="form-control">
+          <option *ngFor="let item of left_pdfs" [value]="item">{{ item }}</option>
+        </select>
+      </div>
+      <div>
+        <span>右PDF路径:&nbsp;&nbsp;</span>
+        <select [(ngModel)]="craft.right_pdf_path" class="form-control">
+          <option *ngFor="let item of right_pdfs" [value]="item">{{ item }}</option>
+        </select>
+      </div>
+    </div>
+  </nb-card-body>
+</nb-card>

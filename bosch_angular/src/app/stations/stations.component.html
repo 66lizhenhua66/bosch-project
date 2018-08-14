@@ -1,0 +1,24 @@
+<nb-layout>
+  <nb-layout-header fixed>
+    <ngx-header></ngx-header>
+  </nb-layout-header>
+
+  <nb-layout-column>
+
+    <nb-card>
+      <nb-card-body>
+        <div style="height: 600px;"></div>
+        <div class="index-div">
+          <a routerLink="/stations/auto/{{ stations[station] }}" >自动模式</a>
+          <a routerLink="/stations/hand/{{ stations[station] }}" routerLinkActive="active">手动模式</a>
+          <a routerLink="/logout/{{ stations[station] }}" >退出</a>
+        </div>
+        
+      </nb-card-body>
+    </nb-card>
+  </nb-layout-column>
+
+  <nb-layout-footer fixed>
+    <ngx-footer></ngx-footer>
+  </nb-layout-footer>
+</nb-layout>

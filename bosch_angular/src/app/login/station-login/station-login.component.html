@@ -1,0 +1,39 @@
+<nb-layout>
+
+  <nb-layout-column style="padding: 0;">
+    <div class="back-div">
+      <div class="login-div">
+        <nb-card class="login-card">
+          <nb-card-header>
+            <div class="header-div">
+              <span>博世力士乐A10-{{ id_2_station[id] }}装配</span> 
+            </div>
+          </nb-card-header>
+          <nb-card-body>
+            <div class="input-group has-person-icon">
+              <div style="width: 0; height: 0; overflow: hidden;">
+              <!-- <div> -->
+                <input id="user_name" type="text" (keyup.enter)="enter()" placeholder="用户名" [(ngModel)]='user_name' class="form-control"/>
+              </div>
+              <div *ngIf="!show_error" style="text-align: center; width: 100%;">
+                <span style="color:black;font-size: 2rem;">请刷卡登陆!</span>
+              </div>
+              <div *ngIf="show_error" style="text-align: center; width: 100%;">
+                <span style="color:red;font-size: 2rem;">未授权的人员!</span>
+              </div>
+
+            </div>
+            
+          </nb-card-body>
+        </nb-card>
+
+      </div>
+
+    </div>
+
+    <div class="footer-div">
+      <span class="created-by">Created with ♥ by <b><a href="#" target="_blank">MaboTech</a></b> 2018</span>
+    </div>
+  </nb-layout-column>
+
+</nb-layout>

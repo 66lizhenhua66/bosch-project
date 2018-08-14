@@ -1,0 +1,66 @@
+.craft-card{
+    border: 1px solid #e3fbff;
+}
+
+.step-div{
+    float: left;
+    width: 36px;
+    height: 434px;
+    font-size: 30px;
+    text-align: center;
+}
+.step-div div{
+    height: 115px;
+    line-height: 115px;
+}
+
+
+
+.left-div{
+    float: left;
+    width: 45%;
+    margin-left: 1%;
+}
+
+.left-div div{
+    margin-bottom: 10px;
+}
+
+.right-div{
+    float: left;
+    width: 45%;
+    margin-left: 3%;
+}
+
+.right-div div{
+    margin-bottom: 10px;
+}
+
+.left-div span{
+    display: inline-block;
+    width: 35%;
+    text-align: right;
+    padding-right: 5px;
+}
+
+.right-div span{
+    padding-right: 5px;
+    display: inline-block;
+    width: 35%;
+    text-align: right;
+
+}
+
+select, input{
+    display: inline-block;
+    width: 60%;
+    // text-align: center;
+}
+
+.right-div .delete{
+    float: right;
+    position: relative;
+    top: -10px;
+    right: -5%;
+    cursor: pointer;
+}

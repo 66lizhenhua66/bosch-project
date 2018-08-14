@@ -1,0 +1,97 @@
+import { Program } from './program';
+
+export const PROGRAMS: Array<Program> = [
+    {
+        station: 'ST10',
+        program_number: 'R111111111',
+        detail_program: [
+            {
+                is_auto: false, step_name: '拿取并扫描标牌', is_ptl: false, 
+                left_pdf: '', right_pdf: '', use_torque: false,
+            },
+            {
+                is_auto: true, step_name: '压机压装并合格自动放行', pro_num: '',
+                count: '2', left_pdf: '', right_pdf: '',
+                stage_name: '阶段名称1', model_number: '', torque: '',
+                test_steps: [
+                    {
+                        test_name: '测试项名称1', data_type: 'float',
+                        min: '2', max: '5', unit: 'Nm',
+                        comparison: '==', precision: '2'
+                    },
+                ]
+            
+            },
+        ]
+    },
+
+    {
+        station: 'ST20',
+        program_number: 'R222222222',
+        detail_program: [
+            {
+                is_auto: false, step_name: '拿取并安装5X半圆导轨', is_ptl: false, 
+                left_pdf: 'left_path', right_pdf: 'right_path', use_torque: false,
+            },
+            {
+                is_auto: true, step_name: '压装传动轴到前轴承', pro_num: 'chengxuhao',
+                count: '2', left_pdf: 'left_path2', right_pdf: 'right_path2',
+                stage_name: '阶段名称1', model_number: '', torque: '',
+                test_steps: [
+                    {
+                        test_name: '压机x', data_type: 'float',
+                        min: '2', max: '5', unit: 'Nm',
+                        comparison: '==', precision: '2'
+                    },
+                ]
+            
+            },
+        ]
+    },
+
+    {
+        station: 'ST30',
+        program_number: 'R333333333',
+        detail_program: [
+            {
+                is_auto: false, step_name: '拿取并安装3X半圆导轨', is_ptl: false, 
+                left_pdf: 'left_path', right_pdf: 'right_path', use_torque: false,
+            },
+            {
+                is_auto: true, step_name: '自动测量轴向间隙', pro_num: 'chengxuhao',
+                count: '2', left_pdf: 'left_path2', right_pdf: 'right_path2',
+                stage_name: '阶段名称1', model_number: '', torque: '',
+                test_steps: [
+                    {
+                        test_name: '压机x', data_type: 'float',
+                        min: '2', max: '5', unit: 'Nm',
+                        comparison: '==', precision: '2'
+                    },
+                ]
+            
+            },
+        ]
+    },
+
+    {
+        station: 'ST40',
+        program_number: 'R444444444',
+        detail_program: []
+    },
+    {
+        station: 'ST50',
+        program_number: 'R555555555',
+        detail_program: []
+    },
+    {
+        station: 'ST60',
+        program_number: 'R666666666',
+        detail_program: []
+    },
+    {
+        station: 'ST70',
+        program_number: 'R777777777',
+        detail_program: []
+    },
+
+]

@@ -1,0 +1,29 @@
+.index-div{
+    text-align: center;
+    height: 100px;
+    line-height: 100px;
+}
+
+.index-div a{
+    color: white;
+    text-decoration: none;
+    padding: .75rem 0.5rem;
+    font-size: 2rem;
+    line-height: 1.25;
+    border-radius: .5rem;
+    margin-left: 5%;
+    background-color: #002b49;
+    border: 2px solid transparent;
+    letter-spacing: .4px;
+    font-weight: 500;
+    font-family: Exo;
+    outline: none;
+}
+.index-div a:hover{
+    color: #fff;
+    background-color: #244962;
+    border-color: transparent;
+}
+.index-div a:active{
+    background-color: #00253f;
+}

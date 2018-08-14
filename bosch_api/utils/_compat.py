@@ -1,8 +1,4 @@
 # -*- coding: utf-8 -*-
-# @Author: caixin
-# @Date:   2017-10-12 10:47:46
-# @Last Modified by:   1249614072@qq.com
-# @Last Modified time: 2017-10-20 00:27:02
 import sys
 import types
 

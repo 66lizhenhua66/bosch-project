@@ -1,8 +1,4 @@
 # -*- coding: utf-8 -*-
-# @Author: caixin
-# @Date:   2017-10-12 14:54:09
-# @Last Modified by:   1249614072@qq.com
-# @Last Modified time: 2018-03-12 11:28:27
 import toml
 import datetime
 import time

@@ -1,8 +1,4 @@
 # -*- coding: utf-8 -*-
-# @Author: caixin
-# @Date:   2018-02-06 17:10:03
-# @Last Modified by:   1249614072@qq.com
-# @Last Modified time: 2018-02-07 09:39:27
 import redis
 
 import constants

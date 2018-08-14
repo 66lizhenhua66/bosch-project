@@ -1,8 +1,4 @@
 # -*- coding: utf-8 -*-
-# @Author: caixin
-# @Date:   2017-10-16 23:39:49
-# @Last Modified by:   1249614072@qq.com
-# @Last Modified time: 2017-11-13 18:04:55
 import constants
 import falcon
 

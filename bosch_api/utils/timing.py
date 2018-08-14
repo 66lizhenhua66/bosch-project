@@ -1,8 +1,4 @@
 # -*- coding: utf-8 -*-
-# @Author: caixin
-# @Date:   2017-03-24 16:39:22
-# @Last Modified by:   caixin
-# @Last Modified time: 2017-04-09 23:30:40
 from apscheduler.schedulers.background import BlockingScheduler
 from apscheduler.schedulers.background import BackgroundScheduler
 

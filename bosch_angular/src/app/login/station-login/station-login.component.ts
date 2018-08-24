@@ -81,6 +81,7 @@ export class StationLoginComponent implements OnInit {
           LOGIN_STATES.station_user = user_info['show_name'];
           LOGIN_STATES.img_path = user_info['img_path'];
           LOGIN_STATES.user_number = user_info['user_number'];
+          localStorage.setItem("login_url", "/login/station/" + this.id);
           clearInterval(this.interval);
           this.router.navigateByUrl('/stations/' + this.id_2_station[this.id]);
 

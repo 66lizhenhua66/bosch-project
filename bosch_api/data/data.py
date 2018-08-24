@@ -11,7 +11,6 @@ from jsonrpc import dispatcher
 from sql.sql_data import pgsql
 from utils.utils import datetime_string, decode_utf_8
 from utils.redis import Redis
-from test_data import KEY, EMPLOYEE_KEY, STEP_KEY
 from operator import itemgetter
 from utils._compat import range_type
 

@@ -203,12 +203,27 @@ export class CraftsComponent implements OnInit {
 
   delete_program(): void {
     // 删除程序  如果只剩下一个 不允许删除
-    // if(this.selected_program.prescriptions.length <= 1) {
-    //   return;
-    // } else {
-    //   this.
-      
-    // }
+    if(this.programs.length <= 1) {
+      this.showToast('error', this.toaset_title, '必须保留一个程序，删除失败！');
+      return;
+    } else {
+      this.programs_service.delete_program(this.selected_program.program_number).subscribe(
+        (data) => {
+          if (data['result']) {
+            this.all_programs = this.all_programs.filter(obj => obj.program_number !== this.selected_program.program_number);
+            this.init_program();
+            this.showToast('success', this.toaset_title, "删除成功！")
+          } else {
+            this.showToast('error', this.toaset_title, "服务器出错！")
+          }
+
+        },
+        (err) => {
+          console.log(err);
+          this.showToast('error', this.toaset_title, "网络出错,请稍后再试！");
+        }
+      );
+    }
 
     
   }

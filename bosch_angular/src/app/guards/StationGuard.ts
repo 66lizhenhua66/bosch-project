@@ -12,6 +12,7 @@ export class StationRouteGuard implements CanActivate {
     if (LOGIN_STATES.station_user) {
       return true;
     }
+    this.router.navigateByUrl(localStorage.getItem("login_url"));
     return false;
 
   }

@@ -22,6 +22,26 @@ export class ProgramsService {
     return this.programs;
   }
 
+  delete_program(program_number: string): Observable<{}> {
+    // 获得所有的程序
+    const httpOptions = {
+      headers: new HttpHeaders({
+        "Content-Type": "application/json",
+        "Authorization": "Basic bWFibzptYWJv",
+      })
+    };
+    return this.$http.post(
+      this.api_url,
+      {
+        "method": "delete_program",
+        "jsonrpc": "2.0",
+        "id": "0",
+        "params": {"program_number": program_number},
+      },
+      httpOptions,
+    );
+  }
+
   download_programs(): Observable<{}> {
     // 获得所有的程序
     const httpOptions = {

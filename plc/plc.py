@@ -11,8 +11,8 @@ class PLC(object):
         pass
 
     def _connect(self):
-        ip = '192.168.100.20'
-        # ip = '127.0.0.1'
+        # ip = '192.168.100.20'
+        ip = '127.0.0.1'
         rack = 0
         slot = 1
         tcpport = 102 

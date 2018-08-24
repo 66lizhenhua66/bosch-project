@@ -1,11 +1,10 @@
-
-
+# -*- coding: utf-8 -*-
+import logging
+import sys
 import re
 
-# common variables
 
 def get_addr(addr):
-    
     if addr.count('DBB'):
         rawstr = r"""DB(\d+)\.DBB(\d+)"""
         compile_obj = re.compile(rawstr)
@@ -52,3 +51,15 @@ def get_addr(addr):
         else:
             print(addr)
             #raise(Exception)
+
+
+def get_logger(logger_name):
+    """创建一个logger,并返回"""
+    plc_logger = logging.getLogger(logger_name)
+    formatter = logging.Formatter('%(asctime)s %(levelname)-8s [%(name)s]: %(message)s')
+    plc_logger.setLevel('DEBUG')
+    console_handle = logging.StreamHandler(sys.stdout)
+    console_handle.setLevel('DEBUG')
+    console_handle.setFormatter(formatter)
+    plc_logger.addHandler(console_handle)
+    return plc_logger

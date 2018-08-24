@@ -5,16 +5,15 @@ import traceback
 import threading
 import queue
 import json
-
 import redis
 
 from plc import PlcReader
-from utils import get_addr
-
+from utils import get_addr, get_logger
 from commander import Writer
 
 
-# asyncio_redis.Connection.create(host='127.0.0.1')
+plc_logger = get_logger("PLC")
+
 
 def get_bit_value(_bytearray, byte_index, bool_index):
     """
@@ -38,21 +37,17 @@ class Checker(object):
 
     def __init__(self, checker_writer):
         self.checker_writer = checker_writer  # get writer
-
         self.redis_host = '127.0.0.1'
-
         self.db_number = 540
-
         self.red = redis.StrictRedis(host=self.redis_host, port=6379, db=0)
-
+        plc_logger.debug("redis connect success!")
         self.reader = PlcReader()
-
         self.interval = 0.5
-
         self.ch = 'channel.st10.part1'
-
         self.station_val = {self.ch: None}
         self.event_queue = queue.Queue()
+
+        self.running = True
 
         self.device_2_station = {
             'ptl_1': "ST10", 'ptl_2': "ST10", 'ptl_3': "ST10", 'next_1': 'ST10', 'rfid_1': 'ST10', 'rfid_2': 'ST10',
@@ -220,8 +215,13 @@ class Checker(object):
         print('done!')
 
     def publish_event(self):
-        while True:
-            data = self.event_queue.get()
+        while self.running:
+            data = None
+            try:
+                data = self.event_queue.get_nowait()
+            except queue.Empty:
+                time.sleep(0.1)
+                continue
             data = json.loads(data)
             if data['type'] == 'camera':
                 camera_num = self.red.get('camera_num').decode()
@@ -229,13 +229,29 @@ class Checker(object):
             else:
                 self.red.publish('A10_EVENT', data)
 
-    def test1(self):
-        # states = self.get_states()
+    def init(self):
+        """init plc state"""
         self.checker_writer.write_camera_done(1)
         time.sleep(0.5)
         self.checker_writer.write_camera_done()
-        while True:
-            db_value = self.reader.read(540, 0, 1400)
+
+    def run(self):
+        # states = self.get_states()
+        while self.running:
+            db_value = None
+            count = 0
+            while self.running:
+                try:
+                    db_value = self.reader.read(540, 0, 1400)
+                except Exception as e:
+                    plc_logger.exception("plc read db_value error, wait 1s and go on!")
+                    count += 1
+                    if count >= 5:
+                        plc_logger.error("read's count more than 5, the program will close, please check plc's network!")
+                        self.running = False
+                        return
+                    time.sleep(1)
+                    continue
             # 遍历灯的状态
             for item in self.ptl.keys():
                 addr = self.ptl[item]
@@ -243,11 +259,8 @@ class Checker(object):
                 b = get_bit_value(db_value, start, bit)
                 b = 1 if b else 0
                 if self.states[item] != b:
-                    # self.red.hset('states', item, b)
                     self.states[item] = b
-                    print('fabuzhuangtai.................', item)
                     data = '{"type": "state", "device": "%s", "value": %d, "station": "%s"}' % (item, b, self.device_2_station[item])
-                    # self.red.publish('A10_EVENT', data)
                     self.event_queue.put(data)
 
             # 遍历取料的状态
@@ -257,8 +270,19 @@ class Checker(object):
                 b = get_bit_value(db_value, start, bit)
                 if b:
                     # 1. close ptl
-                    self.checker_writer.write_ptl(item, val=0)
-                    # 2. reset ptl_done = 0
+                    count = 0
+                    while self.running:
+                        try:
+                            self.checker_writer.write_ptl(item, val=0)
+                        except Exception as e:
+                            plc_logger.exception("close ptl error")
+                            count += 1
+                            if count >= 5:
+                                self.running = False
+                                plc_logger.error("plc connection error, the program will close after 1s!")
+                                time.sleep(1)
+                                return
+                            time.sleep(0.1)
 
             # 遍历下一步按钮的状态
             for item in self.next_cfm:
@@ -270,7 +294,7 @@ class Checker(object):
                     if not b:
                         data = '{"type": "state", "device": "next", "value": 1, "station": "%s"}' % self.device_2_station[item]
                         self.event_queue.put(data)
-                        print("按下下一步： ", item)
+                        plc_logger.info("pressed {}-next".format(item))
                     self.states[item] = b
 
             # 遍历相机按下状态
@@ -281,17 +305,24 @@ class Checker(object):
                 b = 1 if b else 0
                 if self.states[item] != b:
                     if b:
-                        print("进行拍照")
                         self.event_queue.put('{"type": "camera"}')
+                        plc_logger.info("pressed camera")
                     else:
-                        print('wirte camera_done to 0')
-                        self.checker_writer.write_camera_done(val=0)
+                        count = 0
+                        while self.running:
+                            try:
+                                self.checker_writer.write_camera_done(val=0)
+                            except Exception as e:
+                                count += 1
+                                plc_logger.exception("write camera done error!")
+                                if count >= 5:
+                                    plc_logger.error("retry write camera done more than 5, the program wille close after 1s")
+                                    self.running = False
+                                    time.sleep(1)
+                                    return
+                                time.sleep(0.1)
                     self.states[item] = b
-            # for item in self.st_done_test:
-            #     db_number, start, bit = get_addr(self.st_done_test[item])
-            #     print(db_number, start, bit, end=': ')
-            #     b = get_bit_value(db_value, start, bit)
-            #     print(b)
+
             time.sleep(0.1)
 
     def test2(self):
@@ -313,88 +344,55 @@ class Checker(object):
         #     self.red.publish('ST10_EVENT', '{"device":"ptl_1","value":1}')
         print('\n')
 
-    def run(self):
-        """
-        """
-        while True:
-            try:
-                self._execute()
-            except Exception as ex:
-                print(traceback.print_exc())
 
-            time.sleep(self.interval)
-
-    def _execute(self):
-        """
-        
-        """
-        offset = 256
-
-        v = self.reader.read(self.db_number, offset, 1100 - offset)
-
-        # print(v)
-
-        # v = get_bytes(v, 0, 8)
-
-        # print(bytearray(v))
-
-        stations = ['st00', 'st10', 'st20']
-
-        # addrs = {'part1':'DB540,DBX1.1', 'part2':'DB540,DBX1.3', 'part3':'DB540,DBX1.2'}
-
-        for key in self.ptl_done.keys():
-
-            db_number, start, bit = get_addr(self.ptl_done[key])
-
-            start = start - offset
-
-            print(db_number, start, bit)
-
-            # get bit value
-            b = get_bit_value(v, start, bit)
-
-            for ch in self.station_val:
-                val = self.station_val[ch]
-                if val == b:
-                    print('same')
-                else:
-                    print(ch, b)
-                    v = self.red.set(ch, b)
-                    # print('set:',v)
-                    v = self.red.get(ch)
-
-                    print('get:', v)
-
-                    self.red.publish('ST10_EVENT', '{"device":"ptl_1","value":1}')
-                    # self.red.lpush('DQ','ab')
-
-            # print(start, bit)
-
-        # self.reader.set_bool(db_number, start, bit, True)
-
-        # self.reader.write_sn(db_number, 1, b'abce0000')
-
-        # ps = red.pubsub()
-
-        # ps.subscribe(['OPTIONS', 'mabo'])
+def get_connection():
+    """获得plc的连接"""
+    checker_write = None
+    checker_read = None
+    count = 0
+    while True:
+        try:
+            checker_write = Writer()
+            checker_read = Checker(checker_write)
+        except Exception as e:
+            plc_logger.exception("error")
+            checker_write = None
+            checker_read = None
+            count += 1
+        finally:
+            if checker_read and checker_write:
+                break
+            plc_logger.debug("reconnect after 5s")
+            time.sleep(5)
+    return checker_read, checker_write
 
 
 def main():
     """
     """
-
-    checker_write = Writer()
-    checker_read = Checker(checker_write)
-    t1 = threading.Thread(target=checker_read.test1, args=[])
-    t2 = threading.Thread(target=checker_write.run, args=[])
-    t3 = threading.Thread(target=checker_read.publish_event, args=[])
-    t1.start()
-    t2.start()
-    t3.start()
-    t1.join()
-    t2.join()
-    t3.join()
-    # checker_read.test()
+    first = True
+    while True:
+        plc_logger.debug("start...")
+        checker_read, checker_write = get_connection()
+        if first:
+            checker_write.write_complete('ST10')
+            first = False
+        t1 = threading.Thread(target=checker_read.run, args=[], daemon=True)
+        t2 = threading.Thread(target=checker_write.run, args=[plc_logger, ], daemon=True)
+        t3 = threading.Thread(target=checker_read.publish_event, args=[], daemon=True)
+        t1.start()
+        t2.start()
+        t3.start()
+        while True:
+            if not checker_write.running or not checker_read.running:
+                checker_read.red.publish("START", "1")
+                checker_read.running = False
+                checker_write.running = False
+                break
+            time.sleep(0.1)
+        t1.join()
+        t2.join()
+        t3.join()
 
 
 if __name__ == '__main__':

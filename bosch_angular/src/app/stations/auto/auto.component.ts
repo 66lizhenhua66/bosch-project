@@ -143,14 +143,21 @@ export class AutoComponent implements OnInit {
         if(data["station"] === this.id_2_station[this.id]) {
           console.log(data);
           if(data["type"] === "state") {
+            // 改变防错灯状态
             this.change_state(data);
           } else if (data['type'] === 'add_sn') {
+            // 添加序列号
             this.add_sn(data);
           } else if (data['type'] === 'photo') {
+            // 照相的结果
             this.complete_photo(data);
           } else if (data['type'] === 'torque') {
             // 如果返回的是扭矩枪的结果，则调用对应方法
             this.complete_torque(data);
+          } else if (data['type'] === 'press') {
+            // 返回压机结果
+            
+
           }
         }
       },

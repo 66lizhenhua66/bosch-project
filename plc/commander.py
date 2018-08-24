@@ -12,19 +12,13 @@ from utils import get_addr
 class Writer(object):
 
     def __init__(self):
-
+        self.running = True
         self.redis_host = 'localhost'
-
         self.db_number = 540  # start,bit,val
-
         self.plc_writer = PlcWriter()
-
         self.red = redis.Redis(host=self.redis_host, db=0)
-
         self.ps = self.red.pubsub()
-
         self.ps.subscribe(['START', 'mabo'])
-
         self.ptl_address = {'ptl_1': 'DB540.DBX258.0', 'ptl_2': 'DB540.DBX258.1', 'ptl_3': 'DB540.DBX258.2',
                             'ptl_4': 'DB540.DBX258.3', 'ptl_5': 'DB540.DBX258.4', 'ptl_6': 'DB540.DBX258.5',
                             'ptl_7': 'DB540.DBX258.6', 'ptl_8': 'DB540.DBX258.7', 'ptl_9': 'DB540.DBX888.0',
@@ -32,7 +26,6 @@ class Writer(object):
                             'ptl_13': 'DB540.DBX1098.1', 'ptl_14': 'DB540.DBX1098.2', 'ptl_15': 'DB540.DBX1098.3',
                             'ptl_16': 'DB540.DBX1098.4', 'ptl_17': 'DB540.DBX1098.5', 'ptl_18': 'DB540.DBX1098.6',
                             'ptl_19': 'DB540.DBX1098.7', 'ptl_20': 'DB540.DBX1099.0'}
-
         self.st_done = {'st10_done': 'DB540.DBX7.4', 'st20_done': 'DB540.DBX7.5', 'st30_done': 'DB540.DBX7.6',
                         'st40_done': 'DB540.DBX7.7', 'st50_done': 'DB540.DBX8.0', 'st60_done': 'DB540.DBX8.1',
                         'st70_done': 'DB540.DBX8.2'}
@@ -47,8 +40,7 @@ class Writer(object):
             "write_ptl": self.write_ptl, "write_sn": self.write_rfid,
             "write_complete": self.write_complete, "write_ptl_by_str": self.write_ptl_by_str,
             'write_camera_done': self.write_camera_done,
-
-       }
+        }
 
     def write_camera_done(self, val=0):
         db_number, start, bit = get_addr(self.camera_done['camera_done'])
@@ -106,13 +98,11 @@ class Writer(object):
                 print(ex)
             time.sleep(3)
 
-    def run(self):
-
-        while True:
-
+    def run(self, plc_logger):
+        count = 0
+        while self.running:
             try:
                 for item in self.ps.listen():
-                    print(item)
                     if item['type'] == 'message':
                         option_key = int(item['data'])
                         # print(option_key)
@@ -120,10 +110,15 @@ class Writer(object):
                         task = json.loads(task_str)
                         print("run :", task['method'], 'params: ', task['params'])
                         self.option_methods[task['method']](task['params'])
-
             except Exception as ex:
-                print(ex)
-                print(traceback.print_exc)
+                count += 1
+                plc_logger.exception("plc write error!")
+                if count >= 5:
+                    self.running = False
+                    plc_logger.error("plc write error,the program will close after 1s!")
+                    time.sleep(1)
+                    return
+                time.sleep(0.1)
 
 
 def main():

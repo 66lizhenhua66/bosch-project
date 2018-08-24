@@ -237,6 +237,7 @@ class Checker(object):
 
     def run(self):
         # states = self.get_states()
+        self.init()
         while self.running:
             db_value = None
             count = 0

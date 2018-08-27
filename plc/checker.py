@@ -6,7 +6,6 @@ import threading
 import queue
 import json
 import redis
-
 from plc import PlcReader
 from utils import get_addr, get_logger
 from commander import Writer

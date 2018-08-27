@@ -375,8 +375,8 @@ def main():
     """
     """
     first = True
+    plc_logger.debug("start...")
     while True:
-        plc_logger.debug("start...")
         checker_read, checker_write = get_connection()
         if first:
             checker_write.write_complete('ST10')
@@ -389,9 +389,9 @@ def main():
         t3.start()
         while True:
             if not checker_write.running or not checker_read.running:
-                checker_read.red.publish("START", "1")
                 checker_read.running = False
                 checker_write.running = False
+                checker_read.red.publish("START", "1")
                 break
             time.sleep(0.1)
         t1.join()

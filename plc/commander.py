@@ -108,7 +108,8 @@ class Writer(object):
                         # print(option_key)
                         task_str = self.red.hget("option_hashes", option_key).decode()
                         task = json.loads(task_str)
-                        print("run :", task['method'], 'params: ', task['params'])
+                        # print("run :", task['method'], 'params: ', task['params'])
+                        plc_logger.debug("run: {}, params: {}".format(task['method'], task['params']))
                         self.option_methods[task['method']](task['params'])
             except Exception as ex:
                 count += 1

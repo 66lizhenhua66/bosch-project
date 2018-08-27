@@ -244,6 +244,7 @@ class Checker(object):
             while self.running:
                 try:
                     db_value = self.reader.read(540, 0, 1400)
+                    break
                 except Exception as e:
                     plc_logger.exception("plc read db_value error, wait 1s and go on!")
                     count += 1
@@ -275,6 +276,7 @@ class Checker(object):
                     while self.running:
                         try:
                             self.checker_writer.write_ptl(item, val=0)
+                            break
                         except Exception as e:
                             plc_logger.exception("close ptl error")
                             count += 1
@@ -313,6 +315,7 @@ class Checker(object):
                         while self.running:
                             try:
                                 self.checker_writer.write_camera_done(val=0)
+                                break
                             except Exception as e:
                                 count += 1
                                 plc_logger.exception("write camera done error!")

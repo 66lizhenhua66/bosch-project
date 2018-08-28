@@ -223,10 +223,20 @@ class Checker(object):
                 continue
             data = json.loads(data)
             if data['type'] == 'camera':
-                camera_num = self.red.get('camera_num').decode()
-                self.red.publish("CAMERA", camera_num)
+                try:
+                    camera_num = self.red.get('camera_num').decode()
+                    self.red.publish("CAMERA", camera_num)
+                except Exception as e:
+                    plc_logger.exception("event redis publish fail!")
+                    self.running = False
+                    break
             else:
-                self.red.publish('A10_EVENT', data)
+                try:
+                    self.red.publish('A10_EVENT', data)
+                except Exception as e:
+                    plc_logger.exception("event redis publish fail!")
+                    self.running = False
+                    break
 
     def init(self):
         """init plc state"""

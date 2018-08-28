@@ -41,6 +41,14 @@ export class AutoComponent implements OnInit {
   private torque_time: string = '5';  // 扭矩枪完成等待的时间
   private temp_states: any = [];  // 扭矩枪的结果集
 
+  private press_move: string = '';  // 压力机的位移
+  private pressure: string = '';  // 压力机的大小
+  private press_result: boolean = false;  // 压力机的结果 ok or nok
+  private press_time: string = '5'; // 压机完成结果展示时间
+
+  private total_orders: string = '0';  // 总共的订单数量
+  private current_order: string = '0';  // 当前的订单数量
+
   private selected_programs: Program[];  // 当前工站的所有程序
   private id: number;
   private id_2_station = {
@@ -134,8 +142,8 @@ export class AutoComponent implements OnInit {
 
   connect(): void {
     // 连接ws
-    this.ws_service.connect("ws://192.168.100.1:5678/" + this.id)
-    // this.ws_service.connect("ws://127.0.0.1:5678/" + this.id)
+    // this.ws_service.connect("ws://192.168.100.1:5678/" + this.id)
+    this.ws_service.connect("ws://127.0.0.1:5678/" + this.id)
     .subscribe(
       (data) => {
         // 如果是当前工位的，则进行改变状态
@@ -156,6 +164,7 @@ export class AutoComponent implements OnInit {
             this.complete_torque(data);
           } else if (data['type'] === 'press') {
             // 返回压机结果
+            this.complete_press(data);
             
 
           }
@@ -165,6 +174,41 @@ export class AutoComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+
+  complete_press(data: any): void {
+    // 接收到压力机数值的操作
+    if (this.selected_step.is_auto) {
+      let pro_num_list = this.selected_step['pro_num'].split('-');
+      if (pro_num_list[0] === "P") {
+        this.press_move = data['move'];
+        this.pressure = data['pressure'];
+        this.press_result = data['result'];
+        if (this.press_result) {
+          let i = setInterval(() => {
+            this.press_time = (parseInt(this.press_time) - 1).toString();
+          }, 1000);
+          setTimeout(() => {
+            clearInterval(i);
+            this.press_move = '';
+            this.pressure = '';
+            this.press_result = false;
+            this.press_time = '5';
+            this.next_or_complete();
+          }, 5000);
+        }
+      }
+    }
+
+  }
+
+  focus_press(): void {
+    // 压机强制下一步
+    this.press_move = '';
+    this.pressure = '';
+    this.press_result = false;
+    this.press_time = '5';
+    this.next_or_complete();
   }
 
   complete_torque(data): void {
@@ -284,6 +328,8 @@ export class AutoComponent implements OnInit {
           this.selected_order = data['result']['selected_order'];
           this.current_step_index = 0;
           this.selected_step = this.selected_program.detail_program[this.current_step_index];  // 默认选中程序的第一步
+          this.total_orders = data['result']['total_orders'];
+          this.current_order = data['result']['current_order'];
           // console.log(this.selected_order);
           // console.log(this.selected_program);
           if(this.selected_step.is_auto) {
@@ -312,17 +358,12 @@ export class AutoComponent implements OnInit {
     // 改变状态做对应的操作
     // console.log("come in!");
     if(recv_data['device'] === "next") {
-      if(this.selected_step.is_auto) {
-        // 如果是自动，并是压力机，则可进行下一步
-        if(this.selected_step['pro_num'].split('-')[0] === 'P') {
-          this.next_or_complete();
-        }
-      } else {
-        // 如果手动，仅仅没有ptl的时候跳下一步
+      if(!this.selected_step.is_auto) {
+        // 如果是手动，并且不是PTL，则可进行下一步
         if(!this.selected_step["is_ptl"]) {
           this.next_or_complete();
         }
-      }
+      } 
     } else if(recv_data['device'] === this.ptlpos_2_name[this.selected_step['ptl_pos']]) {
       if(recv_data['value']) {
         this.selected_states[recv_data['device']] = 1;
@@ -442,6 +483,7 @@ export class AutoComponent implements OnInit {
     LOGIN_STATES.program_user = '';
     LOGIN_STATES.station_user = '';
     LOGIN_STATES.user_number = '';
+    this.ws_service.close();  // 必须关闭当前连接再重新导航
     this.router.navigateByUrl("/login/station/" + this.id);
   }
 
@@ -527,6 +569,13 @@ export class AutoComponent implements OnInit {
       // 如果是自动，则将count赋给temp_count;
       this.temp_count = this.selected_step['count'];
     }
+
+    // 初始化压机的变量
+    this.press_move = '';
+    this.pressure = '';
+    this.press_result = false;
+    this.press_time = '5';
+
     this.light_ptl();
     this.take_photo();
   }

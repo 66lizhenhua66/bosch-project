@@ -246,6 +246,47 @@ nb-card-header {
 
 }
 
+.press-div {
+    position: absolute;
+    bottom: 19%;
+    right: 3%;
+    width: 32%;
+    background-color: #a3bac8;
+    border: 2px solid #d6dee3;
+}
+.press-div table {
+    width: 100%;
+}
+.press-div table th, .press-div table td {
+    text-align: center;
+    width: 25%;
+    border: 1px solid #d6dee3;
+}
+
+.press-button {
+    color: white;
+    // padding: .75rem 0.5rem;
+    margin: .5rem 0;
+    // font-size: 2rem;
+    line-height: 1.25;
+    border-radius: .5rem;
+    // margin-left: 5%;
+    background-color: #002b49;
+    border: 2px solid transparent;
+    letter-spacing: .4px;
+    font-weight: 500;
+    font-family: Exo;
+    outline: none;
+}
+.press-button:hover{
+    color: #fff;
+    background-color: #244962;
+    border-color: transparent;
+}
+.press-button:active{
+    background-color: #00253f;
+}
+
 
 .small-input {
     display: inline-block;

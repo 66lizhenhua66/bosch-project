@@ -91,14 +91,14 @@
               <label for="">订单数量:</label>
             </div>
             <div class="value-div">
-              <input type="text" value="5" class="form-control value-input" disabled>
+              <input type="text" [value]="total_orders" class="form-control value-input" disabled>
             </div>
 
             <div class="label-div">
               <label for="">当前生产:</label>
             </div>
             <div class="value-div">
-              <input type="text" value="5" class="form-control value-input" disabled>
+              <input type="text" [value]="current_order" class="form-control value-input" disabled>
             </div>
             <div class="label-div">
               <label for="">模式状态:</label>
@@ -116,22 +116,22 @@
               </div>
 
               <span *ngIf="selected_step.is_auto">
-                <span *ngIf="selected_step.pro_num.split('-')[0] === 'P'">
+                <!-- <span *ngIf="selected_step.pro_num.split('-')[0] === 'P'">
                   <div *ngIf="current_step_index !== selected_program.detail_program.length - 1">
                     <button (click)="next_or_complete()">下一步</button>
                   </div>
                   <div *ngIf="current_step_index === selected_program.detail_program.length - 1">
                     <button (click)="complete()">完工</button>
                   </div>
-                </span>
-                <span *ngIf="selected_step.pro_num.split('-')[0] !== 'P'">
-                  <div *ngIf="current_step_index !== selected_program.detail_program.length - 1">
-                    <button (click)="next_or_complete()" disabled>下一步</button>
-                  </div>
-                  <div *ngIf="current_step_index === selected_program.detail_program.length - 1">
-                    <button (click)="complete()" disabled>完工</button>
-                  </div>
-                </span>
+                </span> -->
+                <!-- <span *ngIf="selected_step.pro_num.split('-')[0] !== 'P'"> -->
+                <div *ngIf="current_step_index !== selected_program.detail_program.length - 1">
+                  <button (click)="next_or_complete()" style="background-color: grey" disabled>下一步</button>
+                </div>
+                <div *ngIf="current_step_index === selected_program.detail_program.length - 1">
+                  <button (click)="complete()" style="background-color: grey" disabled>完工</button>
+                </div>
+                <!-- </span> -->
               </span>
 
               <span *ngIf="!selected_step.is_auto">
@@ -348,6 +348,41 @@
                     </tbody>
                   </table>
   
+                </div>
+
+                <div class="press-div" *ngIf="selected_step.pro_num.split('-')[0] === 'P'">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>次数</th>
+                        <th>位移</th>
+                        <th>压力值</th>
+                        <th>是否合格</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngIf="press_move">
+                        <td>1</td>
+                        <td>{{ press_move }}</td>
+                        <td>{{ pressure }}</td>
+                        <td *ngIf="press_result" style="background-color: green">OK</td>
+                        <td *ngIf="!press_result" style="background-color: red">NOK</td>
+                      </tr>
+                      <tr *ngIf="press_move">
+                        <td *ngIf="press_result" colspan="5" style="color: green; font-weight: bold; font-size: 1.25rem;">{{ press_time }}S后自动跳下一步</td>
+                        <td *ngIf="!press_result" colspan="5" style="color: red; font-weight: bold; font-size: 1.25rem;">
+                          压力机不合格！
+                          <button (click)="focus_press()" class="press-button">强制下一步</button>
+                        </td>
+                      </tr>
+                      <tr *ngIf="!press_move">
+                        <td colspan="5" style="color: red; font-weight: bold; font-size: 1.25rem;">请按要求完成压力机的操作</td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                  
+
                 </div>
 
               </span>

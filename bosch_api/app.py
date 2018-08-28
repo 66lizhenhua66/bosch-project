@@ -13,7 +13,7 @@ def init_():
 
 if __name__ == '__main__':
     conf = get_conf()
-    init_()
+    # init_()
     sv = conf.get('server', {})
     host = sv.get('host', '0.0.0.0')
     port = sv.get('port', 8888)

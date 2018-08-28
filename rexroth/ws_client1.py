@@ -8,7 +8,7 @@ rd = redis.Redis()
 rd.lpush()
 
 # plc --->>>  browser
-rd.publish("A10_EVENT", {"type": "state", "device": "ptl_1", "value": 0, "station": "ST10"})
+rd.publish("A10_EVENT", {"type": "state", "device": "ptl_3", "value": 0, "station": "ST10"})
 rd.publish("A10_EVENT", {"type": "state", "device": "ptl_2", "value": 0, "station": "ST20"})
 rd.publish("A10_EVENT", {"type": "state", "device": "ptl_3", "value": 1, "station": "ST30"})
 #   next
@@ -18,9 +18,12 @@ rd.publish("A10_EVENT", {"type": "state", "device": "next", "value": 1, "station
 
 # scan_gun --->>> browser
 rd.publish("A10_SN", {"type": "add_sn", "sn": "10000000", "complete": 1, "station": "ST10"})
-rd.publish("A10_SN", {"type": "add_sn", "sn": "10000000", "complete": 1, "station": "ST40"})
+rd.publish("A10_SN", {"type": "add_sn", "sn": "32343236", "complete": 1, "station": "ST70"})
 rd.publish("A10_SN", {"type": "add_sn", "sn": "12345679", "complete": 0, "station": "ST10"})
 rd.expire('txt_set', 10)
+
+# press --->>> browser
+rd.publish("A10_SN", {"type": "press", "station": "ST10", "device": "1", "move": "20", "pressure": "20", "result": 1})
 
 # torque --->>> browser
 # recv_data: { "type": "torque", "station": "ST40", "device": "1", "torque": '50Nm', "angle": '20', "result": 1}

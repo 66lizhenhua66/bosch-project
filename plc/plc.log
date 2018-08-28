@@ -1,0 +1,105 @@
+2018-08-27 10:44:59,659 ERROR    [PLC]: error
+Traceback (most recent call last):
+  File "D:/linuxshare/bosch-project/plc/checker.py", line 359, in get_connection
+    checker_write = Writer()
+  File "D:\linuxshare\bosch-project\plc\commander.py", line 18, in __init__
+    self.plc_writer = PlcWriter()
+  File "D:\linuxshare\bosch-project\plc\plc.py", line 53, in __init__
+    self._connect()
+  File "D:\linuxshare\bosch-project\plc\plc.py", line 22, in _connect
+    self.client.connect(ip, rack, slot, tcpport)
+  File "D:\linuxshare\bosch-project\plc\snap7\client.py", line 25, in f
+    check_error(code, context="client")
+  File "D:\linuxshare\bosch-project\plc\snap7\common.py", line 65, in check_error
+    raise Snap7Exception(error)
+snap7.snap7exceptions.Snap7Exception: b' TCP : Connection refused'
+2018-08-27 10:45:05,670 ERROR    [PLC]: error
+Traceback (most recent call last):
+  File "D:/linuxshare/bosch-project/plc/checker.py", line 359, in get_connection
+    checker_write = Writer()
+  File "D:\linuxshare\bosch-project\plc\commander.py", line 18, in __init__
+    self.plc_writer = PlcWriter()
+  File "D:\linuxshare\bosch-project\plc\plc.py", line 53, in __init__
+    self._connect()
+  File "D:\linuxshare\bosch-project\plc\plc.py", line 22, in _connect
+    self.client.connect(ip, rack, slot, tcpport)
+  File "D:\linuxshare\bosch-project\plc\snap7\client.py", line 25, in f
+    check_error(code, context="client")
+  File "D:\linuxshare\bosch-project\plc\snap7\common.py", line 65, in check_error
+    raise Snap7Exception(error)
+snap7.snap7exceptions.Snap7Exception: b' TCP : Connection refused'
+2018-08-27 10:45:11,683 ERROR    [PLC]: error
+Traceback (most recent call last):
+  File "D:/linuxshare/bosch-project/plc/checker.py", line 359, in get_connection
+    checker_write = Writer()
+  File "D:\linuxshare\bosch-project\plc\commander.py", line 18, in __init__
+    self.plc_writer = PlcWriter()
+  File "D:\linuxshare\bosch-project\plc\plc.py", line 53, in __init__
+    self._connect()
+  File "D:\linuxshare\bosch-project\plc\plc.py", line 22, in _connect
+    self.client.connect(ip, rack, slot, tcpport)
+  File "D:\linuxshare\bosch-project\plc\snap7\client.py", line 25, in f
+    check_error(code, context="client")
+  File "D:\linuxshare\bosch-project\plc\snap7\common.py", line 65, in check_error
+    raise Snap7Exception(error)
+snap7.snap7exceptions.Snap7Exception: b' TCP : Connection refused'
+2018-08-27 10:45:17,685 ERROR    [PLC]: error
+Traceback (most recent call last):
+  File "D:/linuxshare/bosch-project/plc/checker.py", line 359, in get_connection
+    checker_write = Writer()
+  File "D:\linuxshare\bosch-project\plc\commander.py", line 18, in __init__
+    self.plc_writer = PlcWriter()
+  File "D:\linuxshare\bosch-project\plc\plc.py", line 53, in __init__
+    self._connect()
+  File "D:\linuxshare\bosch-project\plc\plc.py", line 22, in _connect
+    self.client.connect(ip, rack, slot, tcpport)
+  File "D:\linuxshare\bosch-project\plc\snap7\client.py", line 25, in f
+    check_error(code, context="client")
+  File "D:\linuxshare\bosch-project\plc\snap7\common.py", line 65, in check_error
+    raise Snap7Exception(error)
+snap7.snap7exceptions.Snap7Exception: b' TCP : Connection refused'
+2018-08-27 10:45:23,688 ERROR    [PLC]: error
+Traceback (most recent call last):
+  File "D:/linuxshare/bosch-project/plc/checker.py", line 359, in get_connection
+    checker_write = Writer()
+  File "D:\linuxshare\bosch-project\plc\commander.py", line 18, in __init__
+    self.plc_writer = PlcWriter()
+  File "D:\linuxshare\bosch-project\plc\plc.py", line 53, in __init__
+    self._connect()
+  File "D:\linuxshare\bosch-project\plc\plc.py", line 22, in _connect
+    self.client.connect(ip, rack, slot, tcpport)
+  File "D:\linuxshare\bosch-project\plc\snap7\client.py", line 25, in f
+    check_error(code, context="client")
+  File "D:\linuxshare\bosch-project\plc\snap7\common.py", line 65, in check_error
+    raise Snap7Exception(error)
+snap7.snap7exceptions.Snap7Exception: b' TCP : Connection refused'
+2018-08-27 10:45:29,691 ERROR    [PLC]: error
+Traceback (most recent call last):
+  File "D:/linuxshare/bosch-project/plc/checker.py", line 359, in get_connection
+    checker_write = Writer()
+  File "D:\linuxshare\bosch-project\plc\commander.py", line 18, in __init__
+    self.plc_writer = PlcWriter()
+  File "D:\linuxshare\bosch-project\plc\plc.py", line 53, in __init__
+    self._connect()
+  File "D:\linuxshare\bosch-project\plc\plc.py", line 22, in _connect
+    self.client.connect(ip, rack, slot, tcpport)
+  File "D:\linuxshare\bosch-project\plc\snap7\client.py", line 25, in f
+    check_error(code, context="client")
+  File "D:\linuxshare\bosch-project\plc\snap7\common.py", line 65, in check_error
+    raise Snap7Exception(error)
+snap7.snap7exceptions.Snap7Exception: b' TCP : Connection refused'
+2018-08-27 10:45:35,695 ERROR    [PLC]: error
+Traceback (most recent call last):
+  File "D:/linuxshare/bosch-project/plc/checker.py", line 359, in get_connection
+    checker_write = Writer()
+  File "D:\linuxshare\bosch-project\plc\commander.py", line 18, in __init__
+    self.plc_writer = PlcWriter()
+  File "D:\linuxshare\bosch-project\plc\plc.py", line 53, in __init__
+    self._connect()
+  File "D:\linuxshare\bosch-project\plc\plc.py", line 22, in _connect
+    self.client.connect(ip, rack, slot, tcpport)
+  File "D:\linuxshare\bosch-project\plc\snap7\client.py", line 25, in f
+    check_error(code, context="client")
+  File "D:\linuxshare\bosch-project\plc\snap7\common.py", line 65, in check_error
+    raise Snap7Exception(error)
+snap7.snap7exceptions.Snap7Exception: b' TCP : Connection refused'

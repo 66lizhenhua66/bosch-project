@@ -2,8 +2,8 @@
 import toml
 import datetime
 import time
-import threading
-
+import logging
+import sys
 import constants
 from ._compat import PY3, urlparse, parse_qs, string_types
 
@@ -66,6 +66,22 @@ def dir_config(obj, *args, **kwargs):
         return {k: getattr(obj, k) for k in dir(obj) if k.isupper()}
     except Exception as e:
         raise e
+
+
+def get_logger(logger_name):
+    """创建一个logger,并返回"""
+    plc_logger = logging.getLogger(logger_name)
+    formatter = logging.Formatter('%(asctime)s %(levelname)-8s [%(name)s]: %(message)s')
+    plc_logger.setLevel('DEBUG')
+    file_handle = logging.FileHandler("./api.log")
+    file_handle.setLevel('DEBUG')
+    file_handle.setFormatter(formatter)
+    plc_logger.addHandler(file_handle)
+    console_handle = logging.StreamHandler(sys.stdout)
+    console_handle.setLevel('DEBUG')
+    console_handle.setFormatter(formatter)
+    plc_logger.addHandler(console_handle)
+    return plc_logger
 
 
 if __name__ == '__main__':

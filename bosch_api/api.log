@@ -1,0 +1,123 @@
+2018-08-27 13:16:21,749 INFO     [api]: get all program_numbers!
+2018-08-27 13:16:21,894 INFO     [api]: get orders done!
+2018-08-27 13:18:20,292 INFO     [api]: get all programs data!
+2018-08-27 13:19:26,154 INFO     [api]: update a program: R111111111
+2018-08-27 13:19:26,270 INFO     [api]: update a program: R111111111
+2018-08-27 13:19:26,390 INFO     [api]: update a program: R111111111
+2018-08-27 13:19:26,510 INFO     [api]: update a program: R111111111
+2018-08-27 13:19:26,623 INFO     [api]: update a program: R111111111
+2018-08-27 13:19:26,740 INFO     [api]: update a program: R111111111
+2018-08-27 13:19:26,864 INFO     [api]: update a program: R111111111
+2018-08-27 13:22:08,995 INFO     [api]: get all program_numbers!
+2018-08-27 13:22:09,115 INFO     [api]: get orders done!
+2018-08-27 13:22:11,206 INFO     [api]: get all programs data!
+2018-08-27 13:22:19,260 INFO     [api]: login st00 success by mabo
+2018-08-27 13:22:19,433 INFO     [api]: get all programs data!
+2018-08-27 13:22:22,426 INFO     [api]: get all program_numbers!
+2018-08-27 13:22:22,545 INFO     [api]: get orders done!
+2018-08-27 13:22:55,808 INFO     [api]: get all programs data!
+2018-08-27 13:22:56,781 INFO     [api]: get all program_numbers!
+2018-08-27 13:22:56,902 INFO     [api]: get orders done!
+2018-08-27 13:24:34,571 INFO     [api]: according station and sn to get program data
+2018-08-27 13:30:54,727 INFO     [api]: according station and sn to get program data
+2018-08-27 13:37:06,621 INFO     [api]: according station and sn to get program data
+2018-08-27 13:39:08,564 INFO     [api]: according station and sn to get program data
+2018-08-27 13:40:31,858 INFO     [api]: according station and sn to get program data
+2018-08-27 13:47:37,224 INFO     [api]: according station and sn to get program data
+2018-08-27 14:14:56,257 INFO     [api]: according station and sn to get program data
+2018-08-27 14:23:05,695 INFO     [api]: according station and sn to get program data
+2018-08-27 15:22:06,097 INFO     [api]: login st00 success by mabo
+2018-08-27 15:22:07,241 INFO     [api]: get all programs data!
+2018-08-27 15:22:32,552 INFO     [api]: update a program: R111111111
+2018-08-27 15:22:32,684 INFO     [api]: update a program: R111111111
+2018-08-27 15:22:32,809 INFO     [api]: update a program: R111111111
+2018-08-27 15:22:32,925 INFO     [api]: update a program: R111111111
+2018-08-27 15:22:33,046 INFO     [api]: update a program: R111111111
+2018-08-27 15:22:33,162 INFO     [api]: update a program: R111111111
+2018-08-27 15:22:33,275 INFO     [api]: update a program: R111111111
+2018-08-27 15:25:09,211 INFO     [api]: according station and sn to get program data
+2018-08-27 15:25:16,208 INFO     [api]: lights ptl-ptl_3
+2018-08-27 16:40:18,221 INFO     [api]: according station and sn to get program data
+2018-08-27 16:40:22,449 INFO     [api]: lights ptl-ptl_3
+2018-08-27 16:40:31,976 INFO     [api]: login st00 success by mabo
+2018-08-27 16:40:32,146 INFO     [api]: get all programs data!
+2018-08-27 16:40:36,194 INFO     [api]: update a program: R111111111
+2018-08-27 16:40:36,315 INFO     [api]: update a program: R111111111
+2018-08-27 16:40:36,440 INFO     [api]: update a program: R111111111
+2018-08-27 16:40:36,554 INFO     [api]: update a program: R111111111
+2018-08-27 16:40:36,665 INFO     [api]: update a program: R111111111
+2018-08-27 16:40:36,779 INFO     [api]: update a program: R111111111
+2018-08-27 16:40:36,900 INFO     [api]: update a program: R111111111
+2018-08-27 16:40:44,451 INFO     [api]: according station and sn to get program data
+2018-08-28 10:29:33,428 INFO     [api]: login st00 success by mabo
+2018-08-28 10:29:34,446 INFO     [api]: get all programs data!
+2018-08-28 10:29:45,064 INFO     [api]: get all st00 users data!
+2018-08-28 10:29:52,190 INFO     [api]: get all stations users data
+2018-08-28 13:26:15,475 INFO     [api]: according station and sn to get program data
+2018-08-28 13:27:54,699 INFO     [api]: according station and sn to get program data
+2018-08-28 13:38:32,980 INFO     [api]: according station and sn to get program data
+2018-08-28 13:50:50,732 INFO     [api]: according station and sn to get program data
+2018-08-28 13:53:06,201 INFO     [api]: according station and sn to get program data
+2018-08-28 13:53:47,006 INFO     [api]: according station and sn to get program data
+2018-08-28 13:55:41,617 INFO     [api]: according station and sn to get program data
+2018-08-28 14:02:45,166 INFO     [api]: according station and sn to get program data
+2018-08-28 14:06:01,475 INFO     [api]: according station and sn to get program data
+2018-08-28 14:08:37,651 INFO     [api]: according station and sn to get program data
+2018-08-28 14:09:33,478 INFO     [api]: according station and sn to get program data
+2018-08-28 14:12:45,244 INFO     [api]: according station and sn to get program data
+2018-08-28 14:22:54,839 INFO     [api]: according station and sn to get program data
+2018-08-28 14:40:54,739 INFO     [api]: according station and sn to get program data
+2018-08-28 15:02:08,791 INFO     [api]: [(1,)]
+2018-08-28 15:02:08,792 INFO     [api]: according station and sn to get program data
+2018-08-28 15:03:42,639 INFO     [api]: [(1,)], <class 'list'>, <class 'tuple'>
+2018-08-28 15:03:42,640 INFO     [api]: according station and sn to get program data
+2018-08-28 15:07:05,833 INFO     [api]: [(1,)], <class 'list'>, <class 'int'>
+2018-08-28 15:07:05,833 INFO     [api]: according station and sn to get program data
+2018-08-28 15:14:58,990 INFO     [api]: [(1,)], <class 'list'>, <class 'int'>
+2018-08-28 15:14:58,990 INFO     [api]: according station and sn to get program data
+2018-08-28 15:21:28,865 INFO     [api]: according station and sn to get program data, 1, 0, <class 'int'>
+2018-08-28 15:22:07,037 INFO     [api]: according station and sn to get program data, 1, 0, <class 'int'>
+2018-08-28 15:28:07,134 INFO     [api]: according station and sn to get program data, 1, 0, <class 'int'>
+2018-08-28 15:28:12,282 INFO     [api]: publish complete: ST70
+2018-08-28 15:51:00,288 INFO     [api]: login st00 success by mabo
+2018-08-28 15:51:01,426 INFO     [api]: get all programs data!
+2018-08-28 15:51:09,340 INFO     [api]: get all program_numbers!
+2018-08-28 15:51:09,495 INFO     [api]: get orders done!
+2018-08-28 15:51:32,395 INFO     [api]: publish orders done
+2018-08-28 15:52:03,740 INFO     [api]: according station and sn to get program data
+2018-08-28 15:52:06,553 INFO     [api]: sn_number: 32343234 done
+2018-08-28 15:52:06,557 INFO     [api]: publish complete: ST70
+2018-08-28 15:52:09,984 INFO     [api]: according station and sn to get program data
+2018-08-28 15:52:14,649 INFO     [api]: sn_number: 32343234 done
+2018-08-28 15:52:14,650 INFO     [api]: publish complete: ST70
+2018-08-28 15:52:15,232 INFO     [api]: according station and sn to get program data
+2018-08-28 15:52:22,002 INFO     [api]: sn_number: 32343234 done
+2018-08-28 15:52:22,003 INFO     [api]: publish complete: ST70
+2018-08-28 15:52:22,598 INFO     [api]: according station and sn to get program data
+2018-08-28 15:52:29,853 INFO     [api]: sn_number: 32343234 done
+2018-08-28 15:52:29,854 INFO     [api]: publish complete: ST70
+2018-08-28 15:52:57,536 INFO     [api]: according station and sn to get program data
+2018-08-28 15:53:38,968 INFO     [api]: sn_number: 32343234 done
+2018-08-28 15:53:38,969 INFO     [api]: publish complete: ST70
+2018-08-28 15:53:39,574 INFO     [api]: according station and sn to get program data
+2018-08-28 15:53:41,752 INFO     [api]: sn_number: 32343235 done
+2018-08-28 15:53:41,753 INFO     [api]: publish complete: ST70
+2018-08-28 15:54:09,327 INFO     [api]: according station and sn to get program data
+2018-08-28 15:56:04,585 INFO     [api]: sn_number: 32343236 done
+2018-08-28 15:56:04,586 INFO     [api]: publish complete: ST70
+2018-08-28 16:01:24,015 INFO     [api]: according station and sn to get program data
+2018-08-28 16:01:41,134 ERROR    [api]: login station fail
+2018-08-28 16:02:01,508 ERROR    [api]: login station fail
+2018-08-28 16:02:10,422 INFO     [api]: login station-7 success by Âë²©123
+2018-08-28 16:02:20,547 INFO     [api]: according station and sn to get program data
+2018-08-28 16:02:28,037 INFO     [api]: login station-7 success by Âë²©123
+2018-08-28 16:02:46,702 INFO     [api]: according station and sn to get program data
+2018-08-28 16:06:34,709 INFO     [api]: according station and sn to get program data
+2018-08-28 16:06:42,882 INFO     [api]: sn_number: 32343236 done
+2018-08-28 16:06:42,883 INFO     [api]: publish complete: ST70
+2018-08-28 16:06:43,443 INFO     [api]: according station and sn to get program data
+2018-08-28 16:06:45,402 INFO     [api]: sn_number: 32343236 done
+2018-08-28 16:06:45,402 INFO     [api]: publish complete: ST70
+2018-08-28 16:06:53,870 INFO     [api]: according station and sn to get program data
+2018-08-28 16:07:10,517 INFO     [api]: login station-7 success by Âë²©123
+2018-08-28 16:07:17,692 INFO     [api]: according station and sn to get program data

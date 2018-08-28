@@ -57,7 +57,7 @@ def get_logger(logger_name):
     """创建一个logger,并返回"""
     plc_logger = logging.getLogger(logger_name)
     formatter = logging.Formatter('%(asctime)s %(levelname)-8s [%(name)s]: %(message)s')
-    # plc_logger.setLevel('DEBUG')
+    plc_logger.setLevel('DEBUG')
     file_handle = logging.FileHandler("./plc.log")
     file_handle.setLevel('DEBUG')
     file_handle.setFormatter(formatter)

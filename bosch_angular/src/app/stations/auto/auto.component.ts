@@ -142,8 +142,8 @@ export class AutoComponent implements OnInit {
 
   connect(): void {
     // 连接ws
-    // this.ws_service.connect("ws://192.168.100.1:5678/" + this.id)
-    this.ws_service.connect("ws://127.0.0.1:5678/" + this.id)
+    this.ws_service.connect("ws://192.168.100.1:5678/" + this.id)
+    // this.ws_service.connect("ws://127.0.0.1:5678/" + this.id)
     .subscribe(
       (data) => {
         // 如果是当前工位的，则进行改变状态
@@ -363,7 +363,11 @@ export class AutoComponent implements OnInit {
         if(!this.selected_step["is_ptl"]) {
           this.next_or_complete();
         }
-      } 
+      } else {
+        if (this.selected_step['pro_num'].split('-')[0] === 'P') {
+          this.next_or_complete();
+        }
+      }
     } else if(recv_data['device'] === this.ptlpos_2_name[this.selected_step['ptl_pos']]) {
       if(recv_data['value']) {
         this.selected_states[recv_data['device']] = 1;

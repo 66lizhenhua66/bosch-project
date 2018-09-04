@@ -51,13 +51,31 @@ export class CraftsComponent implements OnInit {
     private toasterService: ToasterService,
     private el: ElementRef,
   ) { 
+    this.STATIONS = STATIONS;
+    this.selected_station = this.STATIONS[0];  // 默认选中第一个
    
   }
 
   ngOnInit() {
-    this.STATIONS = STATIONS;
-    this.selected_station = this.STATIONS[0];  // 默认选中第一个
 
+    this.programs_service.get_options().subscribe(
+      (data) => {
+        console.log(data);
+        if (data['result']) {
+          // console.log(data['result']['option_data']);
+          this.STATIONS = data['result']['option_data'];
+          this.selected_station = this.STATIONS[0];  // 默认选中第一个
+        } else {
+          this.showToast('error', this.toaset_title, "服务器出错！");
+        }
+
+      }, (err) => {
+        this.showToast('error', this.toaset_title, "连接出错，请检查网络！");
+        console.log(err);
+
+      }
+    );
+    
     this.all_programs = this.programs_service.get_programs();
     this.programs_service.download_programs().subscribe(
       (data) => {

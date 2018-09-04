@@ -410,6 +410,18 @@ def delete_station_user(card_id):
     return False
 
 
+@dispatcher.add_method
+def get_options():
+    """获得下拉框选项"""
+    try:
+        with open('./option.json', encoding='utf-8') as f:
+            data = json.load(f)
+            log.info('get options success!')
+    except Exception as e:
+        log.error('get options error!')
+    return {"option_data": data}
+
+
 
 
 

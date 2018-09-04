@@ -38,13 +38,13 @@ export class AutoComponent implements OnInit {
   private temp_count: string = '0';  // 剩余次数, 不更改原来的值，方便重置
   private temp_state: string = '等待';  // 扭矩等的大小
   private temp_okornok: string = '等待';  // 扭矩枪ok or nok
-  private torque_time: string = '5';  // 扭矩枪完成等待的时间
+  private torque_time: string = '2';  // 扭矩枪完成等待的时间
   private temp_states: any = [];  // 扭矩枪的结果集
 
   private press_move: string = '';  // 压力机的位移
   private pressure: string = '';  // 压力机的大小
   private press_result: boolean = false;  // 压力机的结果 ok or nok
-  private press_time: string = '5'; // 压机完成结果展示时间
+  private press_time: string = '3'; // 压机完成结果展示时间
 
   private total_orders: string = '0';  // 总共的订单数量
   private current_order: string = '0';  // 当前的订单数量
@@ -85,7 +85,7 @@ export class AutoComponent implements OnInit {
   private complete_sn: Set<string> = new Set();  // 完工的序列号
   private camera_regex: RegExp = /.*拍照.*/;  //匹配当前的步骤是拍照
   private show_photo: boolean = false;  // 是否显示照片
-  private show_time: string = '5';  // 显示时间
+  private show_time: string = '3';  // 显示时间
   private photo_result: boolean = true;  // 拍照结果OK or NOK
   private left_photo: string = '/assets/camera-photoes/1.bmp';  // 左边照片路径
   private right_photo: string = '/assets/camera-photoes/2.bmp';  // 右边照片路径
@@ -193,9 +193,9 @@ export class AutoComponent implements OnInit {
             this.press_move = '';
             this.pressure = '';
             this.press_result = false;
-            this.press_time = '5';
+            this.press_time = '3';
             this.next_or_complete();
-          }, 5000);
+          }, 3000);
         }
       }
     }
@@ -207,7 +207,7 @@ export class AutoComponent implements OnInit {
     this.press_move = '';
     this.pressure = '';
     this.press_result = false;
-    this.press_time = '5';
+    this.press_time = '3';
     this.next_or_complete();
   }
 
@@ -232,7 +232,7 @@ export class AutoComponent implements OnInit {
         if (data['result']) {
           this.temp_count = (parseInt(this.temp_count) - 1).toString();
           if (this.temp_count === '0') {
-            this.torque_time = '5';
+            this.torque_time = '2';
             let s = setInterval(() => {
               this.torque_time = (parseInt(this.torque_time) - 1).toString();
             }, 1000)
@@ -245,7 +245,7 @@ export class AutoComponent implements OnInit {
               this.next_or_complete();
               clearInterval(s);
 
-            }, 5000);
+            }, 2000);
 
           }
         }
@@ -288,10 +288,10 @@ export class AutoComponent implements OnInit {
         setTimeout(() => {
           // console.log('11111');
           clearInterval(s);
-          this.show_time = '5';
+          this.show_time = '3';
           this.show_photo = false;
           this.next_or_complete();
-        }, 5000);
+        }, 3000);
 
       } else {
         this.photo_result = false;
@@ -301,7 +301,7 @@ export class AutoComponent implements OnInit {
 
   focus_complete(): void {
     // console.log('onnnnnnn');
-    this.show_time = '5';
+    this.show_time = '3';
     this.show_photo = false;
     this.next_or_complete();
   }
@@ -364,9 +364,9 @@ export class AutoComponent implements OnInit {
           this.next_or_complete();
         }
       } else {
-        if (this.selected_step['pro_num'].split('-')[0] === 'P') {
-          this.next_or_complete();
-        }
+        // if (this.selected_step['pro_num'].split('-')[0] === 'P') {
+        //   this.next_or_complete();
+        // }
       }
     } else if(recv_data['device'] === this.ptlpos_2_name[this.selected_step['ptl_pos']]) {
       if(recv_data['value']) {
@@ -558,7 +558,7 @@ export class AutoComponent implements OnInit {
         );
       }
     }
-    this.show_time = '5';
+    this.show_time = '3';
     this.show_photo = false;
     this.current_step_index = 0;
     this.selected_step = this.selected_program.detail_program[this.current_step_index];
@@ -578,7 +578,7 @@ export class AutoComponent implements OnInit {
     this.press_move = '';
     this.pressure = '';
     this.press_result = false;
-    this.press_time = '5';
+    this.press_time = '3';
 
     this.light_ptl();
     this.take_photo();

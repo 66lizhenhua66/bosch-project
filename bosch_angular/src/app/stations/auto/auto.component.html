@@ -116,7 +116,7 @@
               </div>
 
               <span *ngIf="selected_step.is_auto">
-                <span *ngIf="selected_step.pro_num.split('-')[0] === 'P'">
+                <!-- <span *ngIf="selected_step.pro_num.split('-')[0] === 'P'">
                   <div *ngIf="current_step_index !== selected_program.detail_program.length - 1">
                     <button (click)="next_or_complete()">下一步</button>
                   </div>
@@ -124,14 +124,14 @@
                     <button (click)="complete()">完工</button>
                   </div>
                 </span>
-                <span *ngIf="selected_step.pro_num.split('-')[0] !== 'P'">
-                  <div *ngIf="current_step_index !== selected_program.detail_program.length - 1">
-                    <button (click)="next_or_complete()" style="background-color: grey" disabled>下一步</button>
-                  </div>
-                  <div *ngIf="current_step_index === selected_program.detail_program.length - 1">
-                    <button (click)="complete()" style="background-color: grey" disabled>完工</button>
-                  </div>
-                </span>
+                <span *ngIf="selected_step.pro_num.split('-')[0] !== 'P'"> -->
+                <div *ngIf="current_step_index !== selected_program.detail_program.length - 1">
+                  <button (click)="next_or_complete()" style="background-color: grey" disabled>下一步</button>
+                </div>
+                <div *ngIf="current_step_index === selected_program.detail_program.length - 1">
+                  <button (click)="complete()" style="background-color: grey" disabled>完工</button>
+                </div>
+                <!-- </span> -->
               </span>
 
               <span *ngIf="!selected_step.is_auto">
